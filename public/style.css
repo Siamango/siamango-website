@@ -1,0 +1,77 @@
+body {
+    margin: 0px;
+  }
+
+.loadingIMG{
+    width:30%;
+    height:30%;
+    border-radius: 10px;
+}
+
+.loadingBody{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: consolas;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000000;
+    
+}
+
+.loading{
+    position: fixed;
+    bottom: 50px;
+    text-align: center;
+    
+}
+
+.loading::before
+{
+    content:'';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 80%;
+    background: #00dbff;
+    animation: blinkCursor 1s steps(3) infinite;
+}
+
+@keyframes blinkCursor
+{
+    0%,50%
+    {
+        opacity: 1;
+    }
+    75%,100%
+    {
+        opacity: 0;
+    }
+}
+
+.loading h2{
+    position: relative;
+    color: #009fff;
+    letter-spacing: 2px;
+    font-size: 1em;
+    text-transform: uppercase;
+    animation: typing 4s steps(10) infinite;
+    overflow: hidden;
+}
+
+@keyframes typing
+{
+    0%,90%,100%
+    {
+        width: 0;
+    }
+    30%,60%
+    {
+        width: 100px;
+    }
+}
+
