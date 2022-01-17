@@ -17,7 +17,7 @@ const Page404 = ()=>
 {
     return(
         <Page404Container>
-            <img src={logo} style={{width:"80%", marginLeft:"auto", marginRight:"auto"}}/>
+            <img src={logo} alt="NEON CLOUDS" style={{width:"80%", marginLeft:"auto", marginRight:"auto"}}/>
             <div style={{ marginLeft:"auto", marginRight:"auto"}} ><GlitchText fontSize="4em">Page non found</GlitchText></div>
         </Page404Container>);
 } 

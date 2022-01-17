@@ -74,7 +74,7 @@ const Reward = (props: RewardProps) => {
     );
 };
 
-const tickTranslate = (tick:any) =>
+/*const tickTranslate = (tick:any) =>
 {
     var epochTicks = 621355968000000000,    // the number of .net ticks at the unix epoch
     ticksPerMillisecond = 10000,        // there are 10000 .net ticks per millisecond
@@ -87,7 +87,7 @@ const tickTranslate = (tick:any) =>
     jsDate = new Date(jsTicks);
 
     return jsDate;
-} 
+} */
 
 export default Reward;  
 

@@ -72,7 +72,7 @@ export const ImgBox = styled.div`
         background: #000;
         color: #00c3ff;
         position: relative;
-        top: 10px;//top: -65px;
+        padding-top: 10px;//top: -65px;
         //left: 15px;
         text-align: center;
         transition: 0.3s ease-in-out;

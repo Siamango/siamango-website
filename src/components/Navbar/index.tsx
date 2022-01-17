@@ -9,7 +9,6 @@ import * as anchor from "@project-serum/anchor";
 
 //icon
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
-import white from '../../assets/images/whitelisted.png';
 import logo from '../../assets/images/cloud_logo.png';
 
 import {
@@ -27,7 +26,6 @@ const Navbar = (props: NavbarProps) => {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [balance, setBalance] = useState<number>();
-    const [whitelisted, setWithelisted] = useState(false);
     const wallet = useWallet();
   
     const handleClick = () => setClick(!click);
@@ -62,15 +60,6 @@ const Navbar = (props: NavbarProps) => {
           setBalance(balance / LAMPORTS_PER_SOL);
         }
       })();
-
-      if(wallet.connected)
-      {
-          const address = wallet.publicKey?.toBase58();
-      }
-      else
-      {
-        setWithelisted(false);
-      }
         
     }, [wallet.publicKey, props.connection]);
 
@@ -82,7 +71,7 @@ const Navbar = (props: NavbarProps) => {
         <nav className='navbar'>
           <div className='navbar-container'>
             <Link to='home' className='navbar-logo' onClick={closeMobileMenu}>
-              <img src={logo} style={{width:"150px"}}/>
+              <img src={logo} alt="NEON CLOUDS" style={{width:"150px"}}/>
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -145,6 +134,7 @@ const Navbar = (props: NavbarProps) => {
                     style={{textDecoration: "none"}}
                     href='https://twitter.com/NeonCloudsNFT'
                     target='_blank'
+                    rel="noreferrer"
                     aria-label='Twitter'
                   >
                     <i className='fab fa-twitter' />
@@ -157,6 +147,7 @@ const Navbar = (props: NavbarProps) => {
                     style={{textDecoration: "none"}}
                     href='https://instagram.com/NeonCloudsNFT'
                     target='_blank'
+                    rel="noreferrer"
                     aria-label='Instagram'
                   >
                     <i className='fab fa-instagram' />
@@ -168,6 +159,7 @@ const Navbar = (props: NavbarProps) => {
                     className="nav-links"
                     href='https://github.com/Siamango'
                     target='_blank'
+                    rel="noreferrer"
                     aria-label='GitHub'
                   >
                     <i className="fab fa-github"></i>
@@ -179,6 +171,7 @@ const Navbar = (props: NavbarProps) => {
                     className="nav-links"
                     href='https://discord.gg/P8hc8npWRt'
                     target='_blank'
+                    rel="noreferrer"
                     aria-label='Discord'
                   >
                     <i className="fab fa-discord"></i>

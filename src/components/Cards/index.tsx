@@ -1,5 +1,7 @@
-//import nft1 from '../../assets/images/nft1.jpg';
-import GlitchText from '../Glitch';
+import trat from '../../assets/images/trat.jpg';
+import guizz from '../../assets/images/guizz.jpg';
+import nik from '../../assets/images/nik.jpg';
+import giammy from '../../assets/images/giammy.jpg';
 import { Container, Card, Content, ImgBox } from "./CardElements";
 
 const CardSection = () =>
@@ -10,7 +12,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", top:"5%", margin:"auto"}}><GlitchText fontSize="10rem">?</GlitchText></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={trat}/></div>
                         </div>
                         <h1>Trat</h1>
                     </ImgBox>
@@ -25,7 +27,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", top:"5%", margin:"auto"}}><GlitchText fontSize="10rem">?</GlitchText></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={guizz}/></div>
                         </div>
                         <h1>Guizzo</h1>
                     </ImgBox>
@@ -39,7 +41,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", top:"5%", margin:"auto"}}><GlitchText fontSize="10rem">?</GlitchText></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={nik}/></div>
                         </div>
                         <h1>Nik</h1>
                     </ImgBox>
@@ -53,7 +55,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", top:"5%", margin:"auto"}}><GlitchText fontSize="10rem">?</GlitchText></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={giammy}/></div>
                         </div>
                         <h1>Giammy</h1>
                     </ImgBox>

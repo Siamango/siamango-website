@@ -54,7 +54,7 @@ const App = () => {
             <WalletProvider wallets={wallets} autoConnect>
               <WalletDialogProvider>
                 <Switch>
-                  {window.location.host.split('.')[0] == 'collective'?
+                  {window.location.host.split('.')[0] === 'collective'?
                     <Route path="/">
                       <Reward connection={connection}/>
                     </Route>
