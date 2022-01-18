@@ -1,7 +1,7 @@
 
-import img1 from "../../assets/images/cloudiesGif.gif";
+import img1 from "../../assets/images/cloudies5.gif";
 import img2 from "../../assets/images/NeonCloudsRadRugsCertificate.png";
-import img4 from "../../assets/images/cloudies2.gif";
+import img4 from "../../assets/images/cloudies5.gif";
 
 export const projectData = 
 {
