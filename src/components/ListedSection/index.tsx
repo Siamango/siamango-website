@@ -4,6 +4,7 @@ import howrareis from "../../assets/images/listedSites/howrareis.png"
 import nftcalendar from "../../assets/images/listedSites/nftcalendar-logo.png"
 import nftgenie from "../../assets/images/listedSites/nftgenie-logo-long.png"
 import radrugs from "../../assets/images/listedSites/radrugs.png"
+import nftDesire from "../../assets/images/listedSites/nftDesire.png"
 import { ListedContainer, RADRUGSimg, SiteContainer, SiteContainerRADRUGS } from "./ListedElements";
 
 
@@ -27,6 +28,7 @@ const ListedSection = ()=>
                 <SiteContainer><a href="https://nftgenie.pro/nft.php?id=NTM=" target="blank"><img src={nftgenie} style={{height:"64px"}}></img></a></SiteContainer>
                 <SiteContainer><a href="https://howrare.is/" target="blank"><img src={howrareis} style={{height:"64px"}}></img></a></SiteContainer>
                 <SiteContainer><a href="https://nftcalendar.io/event/neon-clouds-collective/" target="blank"><img src={nftcalendar} style={{height:"64px"}}></img></a></SiteContainer>
+                <SiteContainer><a href="https://nftdesire.io/upcoming-nft-projects/neon-clouds-collective/" target="blank"><img src={nftDesire} style={{height:"64px"}}></img></a></SiteContainer>
             </Container>
         </ListedContainer>
     );
