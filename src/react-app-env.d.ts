@@ -17,3 +17,4 @@ declare module '*.svg' {
 declare module 'react-vertical-timeline-component';
 //declare module 'react-loading-screen';
 declare module 'websocket';
+declare module 'video-react';

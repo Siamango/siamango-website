@@ -41,7 +41,7 @@ const Navbar = (props: NavbarProps) => {
     }
   
     const showButton = () => {
-      if (window.innerWidth <= 1024) {
+      if (window.innerWidth <= 1330) {
         setButton(false);
       } else {
         setButton(true);
@@ -92,6 +92,16 @@ const Navbar = (props: NavbarProps) => {
                   smooth={true} duration={500} spy={true} offset={-80}
                 >
                   Cloud
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  to='game'
+                  className='nav-links'
+                  onClick={closeMobileMenuItem}
+                  smooth={true} duration={500} spy={true} offset={-80}
+                >
+                  Game
                 </Link>
               </li>
               <li className='nav-item'>

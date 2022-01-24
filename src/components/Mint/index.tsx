@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {ConnectToStart, Counter, CounterContainer, MintButton, MintContainer, SoldOut} from "./MintElemtes";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -7,152 +7,191 @@ import { CircularProgress, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import * as anchor from "@project-serum/anchor";
 import {
-  CandyMachine,
-  awaitTransactionSignatureConfirmation,
-  getCandyMachineState,
-  mintOneToken,
+    awaitTransactionSignatureConfirmation,
+    CandyMachineAccount,
+    CANDY_MACHINE_PROGRAM,
+    getCandyMachineState,
+    mintOneToken,
 } from "../../candy-machine";
+import { WalletButton } from "../Collective/CollectiveElements";
 
-export interface MintSectionProps
+export interface MintProps
 {
-    candyMachineId: anchor.web3.PublicKey;
-    config: anchor.web3.PublicKey;
-    connection: anchor.web3.Connection;
-    startDate: number;
-    treasury: anchor.web3.PublicKey;
-    txTimeout: number;
+  candyMachineId?: anchor.web3.PublicKey;
+  connection: anchor.web3.Connection;
+  startDate: number;
+  txTimeout: number;
+  rpcHost: string;
 }
 
-const MintSection = (props: MintSectionProps) =>
+const MintSection = (props: MintProps) =>
 {
+    const [isUserMinting, setIsUserMinting] = useState(false);
     const [balance, setBalance] = useState<number>();
-    const [isActive, setIsActive] = useState(false); // true when countdown completes
-    const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
-    const [isMinting, setIsMinting] = useState(false);
-    const [num, setNum] = useState(0); // true when user got to press MINT
     const [startDate, setStartDate] = useState(new Date(props.startDate));
-    const [candyMachine, setCandyMachine] = useState<CandyMachine>();
+    const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+    const [memberRes, setMemberRes] = useState("");
+    const wallet = useWallet();
+
     const [alertState, setAlertState] = useState<AlertState>({
         open: false,
         message: "",
         severity: undefined,
       });
+    
+    const anchorWallet = useMemo(() => {
+        if (
+          !wallet ||
+          !wallet.publicKey ||
+          !wallet.signAllTransactions ||
+          !wallet.signTransaction
+        ) {
+          return;
+        }
+    
+        return {
+          publicKey: wallet.publicKey,
+          signAllTransactions: wallet.signAllTransactions,
+          signTransaction: wallet.signTransaction,
+        } as anchor.Wallet;
+      }, [wallet]);
 
-    const wallet = useWallet();
+    const refreshCandyMachineState = useCallback(async () => {
+      if (!anchorWallet) {
+          return;
+      }
+
+      if (props.candyMachineId) {
+          try {
+          const cndy = await getCandyMachineState(
+              anchorWallet,
+              props.candyMachineId,
+              props.connection,
+          );
+          setCandyMachine(cndy);
+          } catch (e) {
+          console.log('There was a problem fetching Candy Machine state');
+          console.log(e);
+          }
+      }
+    }, [anchorWallet, props.candyMachineId, props.connection]);
 
     const onMint = async () => {
         try {
-            setIsMinting(true);
-            if (wallet.connected && candyMachine?.program && wallet.publicKey) 
-            {
-                const mintTxId = await mintOneToken(
-                candyMachine,
-                props.config,
-                wallet.publicKey,
-                props.treasury
-            );
-
-            const status = await awaitTransactionSignatureConfirmation( mintTxId, props.txTimeout, props.connection, "singleGossip", false);
-
-            if (!status?.err) {
-            setAlertState({
-                open: true,
-                message: "Congratulations! Mint succeeded!",
-                severity: "success",
-            });
-            } else {
-            setAlertState({
-                open: true,
-                message: "Mint failed! Please try again!",
-                severity: "error",
-            });
+            setIsUserMinting(true);
+            document.getElementById('#identity')?.click();
+            if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+              const mintTxId = (
+                await mintOneToken(candyMachine, wallet.publicKey)
+              )[0];
+      
+              let status: any = { err: true };
+              if (mintTxId) {
+                status = await awaitTransactionSignatureConfirmation(
+                  mintTxId,
+                  props.txTimeout,
+                  props.connection,
+                  true,
+                );
+              }
+      
+              if (status && !status.err) {
+                setAlertState({
+                  open: true,
+                  message: 'Congratulations! Mint succeeded!',
+                  severity: 'success',
+                });
+              } else {
+                setAlertState({
+                  open: true,
+                  message: 'Mint failed! Please try again!',
+                  severity: 'error',
+                });
+              }
             }
-            }
-        } 
-        catch (error: any) {
-            // TODO: blech:
-            let message = error.msg || "Minting failed! Please try again!";
+          } catch (error: any) {
+            let message = error.msg || 'Minting failed! Please try again!';
             if (!error.msg) {
-                if (error.message.indexOf("0x138")) {
-                } else if (error.message.indexOf("0x137")) {
+              if (!error.message) {
+                message = 'Transaction Timeout! Please try again.';
+              } else if (error.message.indexOf('0x137')) {
                 message = `SOLD OUT!`;
-                } else if (error.message.indexOf("0x135")) {
+              } else if (error.message.indexOf('0x135')) {
                 message = `Insufficient funds to mint. Please fund your wallet.`;
-                }
+              }
             } else {
-                if (error.code === 311) {
+              if (error.code === 311) {
                 message = `SOLD OUT!`;
-                setIsSoldOut(true);
-                } else if (error.code === 312) {
+                window.location.reload();
+              } else if (error.code === 312) {
                 message = `Minting period hasn't started yet.`;
-                }
+              }
             }
-
+      
             setAlertState({
-                open: true,
-                message,
-                severity: "error",
+              open: true,
+              message,
+              severity: 'error',
             });
-        } 
-        finally {
-            if (wallet?.publicKey) {
-                const balance = await props.connection.getBalance(wallet?.publicKey);
-                setBalance(balance / LAMPORTS_PER_SOL);
-            }
-            setIsMinting(false);
-        }
+          } finally {
+            setIsUserMinting(false);
+          }
     };
 
     useEffect(() => {
+        refreshCandyMachineState();
+      }, [
+        anchorWallet,
+        props.candyMachineId,
+        props.connection,
+        refreshCandyMachineState,
+      ]);
 
-        (async () => {
-            if (!wallet || !wallet.publicKey || !wallet.signAllTransactions || !wallet.signTransaction) 
-            {
-                return;
-            }
+    useEffect( () => {
+      (async () => {
+          if (wallet?.publicKey) {
+            const balance = await props.connection.getBalance(wallet.publicKey);
+            setBalance(balance / LAMPORTS_PER_SOL);
+          }
+        })();
+      if(wallet.connected)
+      {
+          const address = wallet.publicKey?.toBase58();
 
-            
-            //console.log(num);
-            //console.log(props.candyMachineId);
-            //console.log(props.connection);
-            setNum(num+1);
+          fetch(`https://neonclouds.net:5555/api/organization/members?address=`+address,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }}).then(response => response.json())
+          .then(data => setMemberRes(JSON.stringify(data)));
 
-            const anchorWallet = {
-                publicKey: wallet.publicKey,
-                signAllTransactions: wallet.signAllTransactions,
-                signTransaction: wallet.signTransaction,
-            } as anchor.Wallet;
-
-            const { candyMachine, goLiveDate, itemsRemaining } =
-                await getCandyMachineState(
-                anchorWallet,
-                props.candyMachineId,
-                props.connection
-                );
-
-            setIsSoldOut(itemsRemaining === 0);
-            setStartDate(goLiveDate);
-            setCandyMachine(candyMachine);
-            }
-        )();
-    }, [wallet, props.candyMachineId, props.connection]);
+      }
+  }, [wallet.publicKey]);
 
     return(
         <MintContainer id="mint">
-            {   !isSoldOut
+          <WalletButton wallet={wallet} balance={balance}/>
+            {   !candyMachine?.state.isSoldOut
                 ?   !wallet.connected
                     ?  <ConnectToStart>Connect your wallet to mint </ConnectToStart>
-                    :   isActive
-                        ? (isMinting 
-                            ? (<CircularProgress />) 
-                            : (<MintButton onclick={onMint}> MINT YOUR SIAMANGO </MintButton>)
-                        )
-                        : (<Countdown
-                                date={startDate}
-                                onMount={({ completed }) => completed && setIsActive(true)}
-                                onComplete={() => setIsActive(true)}
-                                renderer={renderCounter}
-                            />)
+                    :   candyMachine?.state.isActive
+                        ? memberRes!==""
+                          ?
+                            JSON.parse(memberRes).whitelisted
+                            ? (isUserMinting 
+                                ? (<CircularProgress />) 
+                                : (<MintButton onclick={onMint}> MINT YOUR CLOUDY </MintButton>)
+                            )
+                            : <h1>Sorry you can not access pre-sale mint, cause you are not whitelisted. <br/> The public sale is set to 1st of February! <br/> Stay tuned😎</h1>
+                          : (<Countdown
+                                  date={startDate}
+                                  onMount={({ completed }) => completed}
+                                  onComplete={() => {}}
+                                  renderer={renderCounter}
+                              />)
+                        : <CircularProgress />
+                        
                 :   <SoldOut/>
             }
 

@@ -39,7 +39,7 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(6, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -144,7 +144,7 @@
   transform: translateY(0);
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1330px) {
   .NavbarItems {
     position: relative;
   }
@@ -162,7 +162,7 @@
   }
 
   .nav-menu.active {
-    background: #242222cc;
+    background: #242222ec;
     backdrop-filter: blur(10px);
     left: 0;
     opacity: 1;

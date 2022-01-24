@@ -17,8 +17,6 @@ export interface RewardProps
 
 const Reward = (props: RewardProps) => {
 
-    //const [whitelisted, setWithelisted] = useState(false);
-    //const [collectionRes, setCollectionRes] = useState("");
     const [memberRes, setMemberRes] = useState("");
     
     const [balance, setBalance] = useState<number>();

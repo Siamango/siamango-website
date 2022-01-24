@@ -3,7 +3,7 @@ import HeroSection from "../components/HeroSection/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import InfoSection from "../components/InfoSection";
-import { projectData, teamData  } from "../components/InfoSection/Data";
+import { mintData, projectData, teamData  } from "../components/InfoSection/Data";
 //import CardSection from "../components/Cards/";
 import TimeLine from "../components/TimeLine";
 //import MintSection from "../components/Mint";
@@ -13,6 +13,7 @@ import FaqSection from "../components/Faq";
 import LoreSection from "../components/LoreSection";
 import ListedSection from "../components/ListedSection";
 import CountdownSection from "../components/CountdownSection";
+import NextGenSection from "../components/NextGenGame";
 
 
 export interface HomeProps {
@@ -26,12 +27,14 @@ const Home = (props: HomeProps) => {
       <Navbar connection={props.connection}/>
       <HeroSection />
       <InfoSection {...projectData}/>
-      <CountdownSection/>
+      <CountdownSection />
       <ListedSection/>
       <LoreSection/>
       <CollectiveSection/>
+      <NextGenSection/>
       <TimeLine />
       <InfoSection {...teamData}/>
+      
       <FaqSection/>
       <FloatingCollective/>
       <Footer/>
@@ -39,6 +42,5 @@ const Home = (props: HomeProps) => {
   );
 };
 
-//<MintSection {...props} /><InfoSection {...homeObjectCollective}/><CardSection />  <InfoSection {...homeObjectTwo}/><FloatingCollective/>
-
 export default Home;
+//<InfoSection {...mintData}/>

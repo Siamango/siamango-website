@@ -56,7 +56,7 @@ const CollectiveSection = () => {
         <InfoWrapper>
           <InfoRow
             imgStart={false}
-            style={{ alignItems: "start", borderBottom: "2px solid #fff" }}
+            style={{ alignItems: "start" }}
           >
             <Column1 id="cloud2">
               <TextWrapper style={{ fontSize: "1.2rem" }}>

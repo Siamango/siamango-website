@@ -18,7 +18,7 @@ export const timelineElements = [
     title: "THE BIG DAY",
     date: "Q1 2022",
     description: [
-      "Fair minting of 6969 citizens",
+      "Fair minting of 1569 citizens",
       "10% of mint earnings directly charges The Cloud wallet",
     ],
   },

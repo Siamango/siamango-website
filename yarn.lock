@@ -1621,6 +1621,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.4.5":
+  version: 7.16.7
+  resolution: "@babel/runtime@npm:7.16.7"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 47912f0aaacd1cab2e2552aaf3e6eaffbcaf2d5ac9b07a89a12ac0d42029cb92c070b0d16f825e4277c4a34677c54d8ffe85e1f7c6feb57de58f700eec67ce2f
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.10.4, @babel/template@npm:^7.16.0, @babel/template@npm:^7.3.3":
   version: 7.16.0
   resolution: "@babel/template@npm:7.16.0"
@@ -5589,6 +5598,7 @@ __metadata:
     styled-components: ^5.3.1
     ticks-to-date: ^1.0.3
     typescript: ^4.1.2
+    video-react: ^0.15.0
     web-vitals: ^1.0.1
     websocket: ^1.0.34
   languageName: unknown
@@ -14349,6 +14359,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"redux@npm:^4.0.1":
+  version: 4.1.2
+  resolution: "redux@npm:4.1.2"
+  dependencies:
+    "@babel/runtime": ^7.9.2
+  checksum: 6a839cee5bd580c5298d968e9e2302150e961318253819bcd97f9d945a5a409559eacddf6026f4118bb68b681c593d90e8a2c5bbf278f014aff9bf0d2d8fa084
+  languageName: node
+  linkType: hard
+
 "regenerate-unicode-properties@npm:^9.0.0":
   version: 9.0.0
   resolution: "regenerate-unicode-properties@npm:9.0.0"
@@ -16886,6 +16905,22 @@ __metadata:
   version: 1.0.4
   resolution: "vendors@npm:1.0.4"
   checksum: 4b16e0bc18dbdd7ac8dd745c776c08f6c73e9a7f620ffd9faf94a3d86a35feaf4c6cb1bbdb304d2381548a30d0abe69b83eeb1b7b1bf5bb33935e64b28812681
+  languageName: node
+  linkType: hard
+
+"video-react@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "video-react@npm:0.15.0"
+  dependencies:
+    "@babel/runtime": ^7.4.5
+    classnames: ^2.2.6
+    lodash.throttle: ^4.1.1
+    prop-types: ^15.7.2
+    redux: ^4.0.1
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 7b8b4eed6c3b2fa093274b548a8d3765bf4a256d3dc23e5352bd3a0e1fcc833bd264b46c4c3e09e20ecf21c4fc166ffadae81007e9596d9b93e19da752588ffa
   languageName: node
   linkType: hard
 

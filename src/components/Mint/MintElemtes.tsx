@@ -15,7 +15,7 @@ export const Counter = styled.span`
     box-shadow: 0px 0px 10px #009fff, 0px 0px 30px #009fff;
     border-radius:15px;
     display: grid;
-    grid-template-columns: repeat(9,1fr);
+    grid-template-columns: repeat(7,1fr);
     text-align:center;
 
     & p:first-child
@@ -25,18 +25,18 @@ export const Counter = styled.span`
 
     & section p
     {
-        color:#000;
+        color:#fff;
         margin: 10px;
     }
 
     & section p small
     {
-        color:#000;
+        color:#fff;
     }
     & span
     {
         font-size: 2em;
-        color:#000;
+        color:#fff;
     }
 
     @media screen and (max-width: 900px)
@@ -65,12 +65,12 @@ export const CounterContainer = styled.span`
 
 
 export const MintContainer = styled.div`
-    background-color: black;
+    background-color: transparent;
     width: 100%;
     height: fit-content;
     text-align: center;
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 `;
 
 const H1 = styled.h1`
@@ -86,16 +86,23 @@ const MintButtonContainer = styled.div`
 `;
 
 const MintButtonA = styled.a`
+
     position: relative;
     display: inline-block;
     padding: 15px 30px;
     border: 2px solid #009fff; //#0f0
     margin: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     text-transform: uppercase;
     font-weight: 600;
+    font-size:30px;
     text-decoration:none;
     letter-spacing: 2px;
     color: #fff;
+    
     //-webkit-box-reflect: below 0px linear-gradient(transparent, #0002);
     transition: 0.5s;
 
@@ -118,17 +125,17 @@ const MintButtonA = styled.a`
         top: 50%;
         transform: translateY(-50%);
         width: 20px;
-        height: 2px;
+        height: 4px;
         background: #cd3594;
-        box-shadow: 5px -8px 0 #cd3594,5px 8px 0 #cd3594;
+        box-shadow: 5px -12px 0 #cd3594,5px 12px 0 #cd3594;
         transition: width 0.5s, left 0.5s, height 0.5s, box-shadow 0.5s;
         transition-delay: 1s,0.5s,0s,0s;
     }
 
     &:hover:before
     {
-        width: 60%;
-        height: 100%;
+        width: 50%;
+        height: 102%;
         left: -2px;
         box-shadow: 5px 0 0 #cd3594, 5px 0 0 #cd3594;
         transition-delay: 0s,0s,0.5s,1s;
@@ -142,9 +149,9 @@ const MintButtonA = styled.a`
         top: 50%;
         transform: translateY(-50%);
         width: 20px;
-        height: 2px;
+        height: 4px;
         background: #cd3594;
-        box-shadow: -5px -8px 0 #cd3594, -5px 8px 0 #cd3594;
+        box-shadow: -5px -12px 0 #cd3594, -5px 12px 0 #cd3594;
         transition: width 0.5s, right 0.5s, height 0.5s, box-shadow 0.5s;
         transition-delay: 1s,0.5s,0s,0s;
     }
@@ -152,7 +159,7 @@ const MintButtonA = styled.a`
     &:hover:after
     {
         width: 60%;
-        height: 100%;
+        height: 101%;
         right: -2px;
         box-shadow: -5px 0 0 #cd3594, -5px 0 0 #cd3594;
         transition-delay: 0s,0s,0.5s,1s;

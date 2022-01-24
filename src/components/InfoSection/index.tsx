@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import {Button}  from '../Button';
 import GlitchText from '../Glitch';
 import solLogo from "../../assets/images/solanaLogo.png"
 import { InfoContainer, InfoWrapper, InfoRow, Column1,Column2,TextWrapper,TopLine,Heading,Subtitle,ImgWrap,Img, BtnWrap} from './InfoElements';
 import CardSection from '../Cards';
+import { Counter, CounterContainer } from '../Mint/MintElemtes';
+import Countdown from 'react-countdown';
 
 export interface InfoProps{
     lightBg:any;
@@ -92,19 +93,16 @@ const InfoSection = (props: InfoProps) => {
                             
                             <BtnWrap>
                                 {
-                                    props.id==="project" || props.id==="collection" || props.id==="team" ?
-
-                                        ""
+                                    props.id==="collection"  
+                                    ?
+                                        <Countdown
+                                            date={new Date(2022,1)}
+                                            onMount={({ completed }) => completed }
+                                            onComplete={() => {}}
+                                            renderer={renderCounter}
+                                        />
                                     :
-                                        <Button to={props.to}
-                                            smooth={true}
-                                            duration={500}
-                                            spy={true}
-                                            offset= {-80}
-                                            primary={props.primary ? 1 : 0}
-                                            dark ={props.dark? 1 : 0}>
-                                                {props.buttonLabel}
-                                        </Button>
+                                        ""
                                 }
                                 
                             </BtnWrap>
@@ -128,3 +126,31 @@ const InfoSection = (props: InfoProps) => {
 }
 
 export default InfoSection;
+
+const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
+    return (
+        <CounterContainer>
+            <Counter>
+                <section>
+                    <p>{days}</p>
+                    <p><small>DAYS</small></p>
+                </section>
+                <span>:</span>
+                <section>
+                    <p>{hours}</p>
+                    <p><small>HOURS</small></p>
+                </section>
+                <span>:</span>
+                <section>
+                    <p>{minutes}</p>
+                    <p><small>MINUTES</small></p>
+                </section>
+                <span>:</span>
+                <section>
+                    <p>{seconds}</p>
+                    <p><small>SECONDS</small></p>
+                </section>
+            </Counter>
+        </CounterContainer>
+    );
+  };

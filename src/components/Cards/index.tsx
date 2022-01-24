@@ -1,7 +1,7 @@
-import trat from '../../assets/images/trat.jpg';
-import guizz from '../../assets/images/guizz.jpg';
-import nik from '../../assets/images/nik.jpg';
-import giammy from '../../assets/images/giammy.jpg';
+import trat from '../../assets/images/team/trat.jpg';
+import guizz from '../../assets/images/team/guizz.jpg';
+import nik from '../../assets/images/team/nik.jpg';
+import giammy from '../../assets/images/team/giammy.jpg';
 import { Container, Card, Content, ImgBox } from "./CardElements";
 
 const CardSection = () =>

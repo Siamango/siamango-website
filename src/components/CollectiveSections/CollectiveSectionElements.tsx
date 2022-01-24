@@ -82,7 +82,7 @@ const BtnA2 = styled.a`
     display: inline-block;
     padding: 25px 30px;
     margin: 40px;
-    color: #000;
+    color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s;
@@ -94,10 +94,10 @@ const BtnA2 = styled.a`
     &:hover{
     background: #000;
     color: #fff;
-    box-shadow: 0 0 5px #000,
-                0 0 25px #000,
-                0 0 50px #000,
-                0 0 200px #000;
+    box-shadow: 0 0 5px #fff,
+                0 0 25px #fff,
+                0 0 50px #fff,
+                0 0 200px #fff;
      //-webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
     }
     &:nth-child(1){
@@ -115,7 +115,7 @@ const BtnA2 = styled.a`
         left: 0;
         width: 100%;
         height: 3px;
-        background: linear-gradient(90deg,transparent,#000);
+        background: linear-gradient(90deg,transparent,#fff);
         animation: animate1 2s linear infinite;
     }
     @keyframes animate1{
@@ -131,7 +131,7 @@ const BtnA2 = styled.a`
         right: 0;
         width: 3px;
         height: 100%;
-        background: linear-gradient(180deg,transparent,#000);
+        background: linear-gradient(180deg,transparent,#fff);
         animation: animate2 2s linear infinite;
         animation-delay: 0.5s;
     }
@@ -148,7 +148,7 @@ const BtnA2 = styled.a`
         right: 0;
         width: 100%;
         height: 3px;
-        background: linear-gradient(270deg,transparent,#000);
+        background: linear-gradient(270deg,transparent,#fff);
         animation: animate3 2s linear infinite;
         animation-delay: 1.00s;
     }
@@ -167,7 +167,7 @@ const BtnA2 = styled.a`
         left: 0;
         width: 3px;
         height: 100%;
-        background: linear-gradient(360deg,transparent,#000);
+        background: linear-gradient(360deg,transparent,#fff);
         animation: animate4 2s linear infinite;
         animation-delay: 1.5s;
     }
