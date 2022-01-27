@@ -5,12 +5,20 @@ import { Counter, CounterContainer } from "./CountdownElements";
 import img from "../../assets/images/cloudiesGif.gif"
 import GlitchText from "../Glitch";
 import solLogo from "../../assets/images/solanaLogo.png"
+import {CollectiveButton2} from "../CollectiveSections/CollectiveSectionElements"
 
 const CountdownSection = ()=>
 {
 
-    const [startDate, setStartDate] = useState(new Date(2022,1));
-    const [isActive, setIsActive] = useState(false);
+    const [countdownFinished, setFinished] = useState(false);
+
+    const mintDate = new Date(2022,0,29,22);
+    const now = new Date();
+
+    if(!countdownFinished && mintDate < now )
+    {
+        setFinished(true);
+    }
 
     return(
         <InfoContainer lightBg={false} id = {"presale"}>
@@ -29,12 +37,17 @@ const CountdownSection = ()=>
                             29th January 2022 <br/> Price: 0.35 <img src={solLogo} style={{width:"16px"}}></img>
 
                             <BtnWrap style={{marginTop:"50px"}}>
-                                <Countdown
-                                    date={new Date(2022,0,29,22)}
-                                    onMount={({ completed }) => completed }
-                                    onComplete={() => {}}
-                                    renderer={renderCounter}
-                                />
+                                {
+                                    countdownFinished
+                                    ?   <CollectiveButton2 to=""> GO TO MINT</CollectiveButton2>
+                                    :   <Countdown
+                                            date={mintDate}
+                                            onMount={({ completed }) => completed }
+                                            onComplete={() => {setFinished(true)}}
+                                            renderer={renderCounter}
+                                        />
+                                }
+                                
                             </BtnWrap> 
                         </TextWrapper>
                     </Column1>

@@ -50,6 +50,7 @@ const App = () => {
                     <Route path="/">
                       <Reward connection={connection}/>
                     </Route>
+                    
                   : ""
                   }
                   <Route exact path="/">

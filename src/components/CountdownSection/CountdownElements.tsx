@@ -57,6 +57,6 @@ export const CounterContainer = styled.span`
 
     @media screen and (max-width: 900px)
     {
-        width: 80%;
+        width: 100%;
     }
 `;

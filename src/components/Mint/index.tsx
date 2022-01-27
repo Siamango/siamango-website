@@ -172,11 +172,11 @@ const MintSection = (props: MintProps) =>
     return(
         <MintContainer id="mint">
           <WalletButton wallet={wallet} balance={balance}/>
-            {   !candyMachine?.state.isSoldOut
+            {   true// !candyMachine?.state.isSoldOut
                 ?   !wallet.connected
                     ?  <ConnectToStart>Connect your wallet to mint </ConnectToStart>
                     :   candyMachine?.state.isActive
-                        ? memberRes!==""
+                        ? memberRes==""
                           ?
                             JSON.parse(memberRes).whitelisted
                             ? (isUserMinting 
@@ -185,7 +185,7 @@ const MintSection = (props: MintProps) =>
                             )
                             : <h1>Sorry you can not access pre-sale mint, cause you are not whitelisted. <br/> The public sale is set to 1st of February! <br/> Stay tuned😎</h1>
                           : (<Countdown
-                                  date={startDate}
+                                  date={new Date(2022,0,29,22)}
                                   onMount={({ completed }) => completed}
                                   onComplete={() => {}}
                                   renderer={renderCounter}
@@ -222,7 +222,6 @@ interface AlertState {
   const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
     return (
         <CounterContainer>
-            <h1 style={{padding:"10px"}}>SOMETHING NEW COMING SOON</h1>
             <Counter>
                 <section>
                     <p>{days}</p>
