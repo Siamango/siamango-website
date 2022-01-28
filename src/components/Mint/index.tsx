@@ -9,7 +9,6 @@ import * as anchor from "@project-serum/anchor";
 import {
     awaitTransactionSignatureConfirmation,
     CandyMachineAccount,
-    CANDY_MACHINE_PROGRAM,
     getCandyMachineState,
     mintOneToken,
 } from "../../candy-machine";
@@ -28,7 +27,7 @@ const MintSection = (props: MintProps) =>
 {
     const [isUserMinting, setIsUserMinting] = useState(false);
     const [balance, setBalance] = useState<number>();
-    const [startDate, setStartDate] = useState(new Date(props.startDate));
+    const [startDate,] = useState(new Date(props.startDate));
     const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
     const [memberRes, setMemberRes] = useState("");
     const wallet = useWallet();
@@ -63,15 +62,12 @@ const MintSection = (props: MintProps) =>
 
       if (props.candyMachineId) {
           try {
-          const cndy = await getCandyMachineState(
-              anchorWallet,
-              props.candyMachineId,
-              props.connection,
-          );
-          setCandyMachine(cndy);
-          } catch (e) {
-          console.log('There was a problem fetching Candy Machine state');
-          console.log(e);
+            const cndy = await getCandyMachineState( anchorWallet, props.candyMachineId, props.connection,);
+            setCandyMachine(cndy);
+          } 
+          catch (e) {
+            console.log('There was a problem fetching Candy Machine state');
+            console.log(e);
           }
       }
     }, [anchorWallet, props.candyMachineId, props.connection]);
@@ -140,12 +136,7 @@ const MintSection = (props: MintProps) =>
 
     useEffect(() => {
         refreshCandyMachineState();
-      }, [
-        anchorWallet,
-        props.candyMachineId,
-        props.connection,
-        refreshCandyMachineState,
-      ]);
+      }, [anchorWallet, props.candyMachineId, props.connection, refreshCandyMachineState, ]);
 
     useEffect( () => {
       (async () => {
@@ -158,25 +149,38 @@ const MintSection = (props: MintProps) =>
       {
           const address = wallet.publicKey?.toBase58();
 
-          fetch(`https://neonclouds.net:5555/api/organization/members?address=`+address,{
-          method: "GET",
-          headers: {
-            "access-control-allow-origin" : "*",
-            "Content-type": "application/json; charset=UTF-8"
-          }}).then(response => response.json())
-          .then(data => setMemberRes(JSON.stringify(data)));
-
+          fetch(`https://neonclouds.net:5555/api/organization/members?address=`+address,
+          {
+            method: "GET",
+            headers: {
+              "access-control-allow-origin" : "*",
+              "Content-type": "application/json; charset=UTF-8"
+            }
+          }).then(response => response.json()).then(data => setMemberRes(JSON.stringify(data)));
       }
-  }, [wallet.publicKey]);
+    }, [wallet.publicKey]);
+
+    const [showWalletButton, setButton] = useState(true);
+    const showButton = () => {
+      if (window.innerWidth <= 1330) {
+        setButton(false);
+      } else {
+        setButton(true);
+      }
+    };
+
+    useEffect(() => {
+      showButton();
+    }, []);
 
     return(
         <MintContainer id="mint">
-          <WalletButton wallet={wallet} balance={balance}/>
-            {   true// !candyMachine?.state.isSoldOut
+          {showWalletButton?<WalletButton wallet={wallet} balance={balance}/>:""}
+            {   !candyMachine?.state.isSoldOut
                 ?   !wallet.connected
                     ?  <ConnectToStart>Connect your wallet to mint </ConnectToStart>
                     :   candyMachine?.state.isActive
-                        ? memberRes==""
+                        ? memberRes===""
                           ?
                             JSON.parse(memberRes).whitelisted
                             ? (isUserMinting 
@@ -185,7 +189,7 @@ const MintSection = (props: MintProps) =>
                             )
                             : <h1>Sorry you can not access pre-sale mint, cause you are not whitelisted. <br/> The public sale is set to 1st of February! <br/> Stay tuned😎</h1>
                           : (<Countdown
-                                  date={new Date(2022,0,29,22)}
+                                  date={startDate}
                                   onMount={({ completed }) => completed}
                                   onComplete={() => {}}
                                   renderer={renderCounter}

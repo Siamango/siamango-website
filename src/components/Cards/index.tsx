@@ -12,7 +12,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={trat}/></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={trat} alt="trat"/></div>
                         </div>
                         <h1>Trat</h1>
                     </ImgBox>
@@ -27,7 +27,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={guizz}/></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={guizz} alt="guizz"/></div>
                         </div>
                         <h1>Guizzo</h1>
                     </ImgBox>
@@ -41,7 +41,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={nik}/></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={nik} alt="nik"/></div>
                         </div>
                         <h1>Nik</h1>
                     </ImgBox>
@@ -55,7 +55,7 @@ const CardSection = () =>
                 <Card className="card">
                     <ImgBox className="imgBox">
                         <div style={{background:"#000",borderRadius:"5px", height:"250px",  border:"2px solid #888"}}> 
-                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={giammy}/></div>
+                            <div style={{width:"fit-content", position:"relative", margin:"auto"}}><img src={giammy} alt="giammy"/></div>
                         </div>
                         <h1>Giammy</h1>
                     </ImgBox>

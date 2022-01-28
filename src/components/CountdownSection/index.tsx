@@ -2,7 +2,7 @@ import { useState } from "react";
 import Countdown from "react-countdown";
 import { BtnWrap, Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../InfoSection/InfoElements";
 import { Counter, CounterContainer } from "./CountdownElements";
-import img from "../../assets/images/cloudiesGif.gif"
+import img from "../../assets/images/Cloudies7.gif"
 import GlitchText from "../Glitch";
 import solLogo from "../../assets/images/solanaLogo.png"
 import {CollectiveButton2} from "../CollectiveSections/CollectiveSectionElements"
@@ -34,7 +34,7 @@ const CountdownSection = ()=>
                                 If you are not whitelisted yet, go to our social pages and do not miss the chance to be whitelisted in order to buy a Cloudy before everybody and at a discouted price.
                             </Subtitle>
                             <TopLine >Presale</TopLine>
-                            29th January 2022 <br/> Price: 0.35 <img src={solLogo} style={{width:"16px"}}></img>
+                            29th January 2022 <br/> Price: 0.35 <img src={solLogo} style={{width:"16px"}} alt="SolLogo"></img>
 
                             <BtnWrap style={{marginTop:"50px"}}>
                                 {

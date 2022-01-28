@@ -1,7 +1,7 @@
 //import { LoreContainer, LoreText, LoreWrapper } from "./LoreElements";
 
 import styled from "styled-components/macro";
-import { Column1, Column2, Heading, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../InfoSection/InfoElements";
+import { Column1, Column2, Heading, InfoRow, InfoWrapper, TextWrapper, TopLine } from "../InfoSection/InfoElements";
 
 const LoreContainer = styled.div`
 

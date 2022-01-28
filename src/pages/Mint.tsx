@@ -18,23 +18,58 @@ const MintPageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    img
+    {
+        height: 50%;
+        //object-fit: none;
+    }
+
+    #title
+    {
+        font-size: 70px;
+        text-align: center;
+        text-shadow:rgb(0, 219, 255) -3px 0px 0px, rgb(0, 219, 255) -4px 0px 5px;
+    }
+
+    @media screen and (max-width: 900px)
+    {
+        img
+        {
+            width: 150%;
+            height: auto;
+            object-fit: cover;
+        }
+        #title
+        {
+            font-size: 50px;
+        }
+    }
+
 `;
 
 const MintPage = (props:MintPageProps)=>
 {
-    return(
-        <div > 
-            <video className="video-background" loop autoPlay muted playsInline> 
-                <source src={video} type="video/mp4" />
-                Browser not supported
-            </video>
-            <MintPageContainer>
-                <img id="logo" alt ="" src={img} style={{height:"50%", objectFit:"none"}}></img>
-                <h1 style={{fontSize:"70px", textAlign:"center", textShadow:"rgb(0, 219, 255) -3px 0px 0px, rgb(0, 219, 255) -4px 0px 5px"}}>WHITELISTED PRE-SALE MINT</h1>
-                <MintSection {...props} />
-            </MintPageContainer>
-        </div>
-    );
+    const psw = prompt('NeonClouds dev');
+
+    if(psw==="siamango")
+        return(
+            <div > 
+                <video className="video-background" loop autoPlay muted playsInline> 
+                    <source src={video} type="video/mp4" />
+                    Browser not supported
+                </video>
+                <MintPageContainer>
+                    <img id="logo" alt ="" src={img}></img>
+                    <div id="title" >
+                        WHITELISTED PRE-SALE MINT
+                    </div>
+                    <MintSection {...props} />
+                </MintPageContainer>
+            </div>
+        );
+    else
+        return(<>WTF man, what are you doing here?</>);
 }
 
 export default MintPage;

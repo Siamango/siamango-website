@@ -1,7 +1,7 @@
 
-import img1 from "../../assets/images/cloudies5.gif";
-import img2 from "../../assets/images/NeonCloudsRadRugsCertificate.png";
-import img4 from "../../assets/images/cloudiesGif.gif";
+import img1 from "../../assets/images/Cloudies8.gif";
+import img2 from "../../assets/images/Cloudies7.gif";
+import img3 from "../../assets/images/NeonCloudsRadRugsCertificate.png";
 
 export const projectData = 
 {
@@ -35,7 +35,7 @@ export const mintData =
     buttonLabel: "Go to mint",
     to: "mint",
     imgStart: true,
-    img: img4,
+    img: img2,
     alt: "ART",
     dark: true,
     primary: true,
@@ -54,7 +54,7 @@ export const teamData =
     buttonLabel: "Git Hub",
     to: "home",
     imgStart: false,
-    img: img2,
+    img: img3,
     alt: "ART",
     dark: false,
     primary: false,

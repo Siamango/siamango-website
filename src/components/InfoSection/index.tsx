@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import GlitchText from '../Glitch';
 import solLogo from "../../assets/images/solanaLogo.png"
 import { InfoContainer, InfoWrapper, InfoRow, Column1,Column2,TextWrapper,TopLine,Heading,Subtitle,ImgWrap,Img, BtnWrap} from './InfoElements';
@@ -83,7 +83,7 @@ const InfoSection = (props: InfoProps) => {
                             </Heading> 
                             {props.id==="project"?
                                 <Subtitle darkText={props.darkText}>
-                                    {props.subtitle[0]}<br/><br/>{props.subtitle[1]}<br/><br/><TopLine>Public Sale</TopLine> 1st February 2022 <br/> Price: 0.420 <img src={solLogo} style={{width:"16px"}}></img>
+                                    {props.subtitle[0]}<br/><br/>{props.subtitle[1]}<br/><br/><TopLine>Public Sale</TopLine> 1st February 2022 <br/> Price: 0.420 <img src={solLogo} style={{width:"16px"}} alt="SolLogo"></img>
                                 </Subtitle>
                                 :   
                                 <Subtitle darkText={props.darkText}>

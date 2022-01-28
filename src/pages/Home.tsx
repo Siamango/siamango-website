@@ -3,7 +3,7 @@ import HeroSection from "../components/HeroSection/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import InfoSection from "../components/InfoSection";
-import { mintData, projectData, teamData  } from "../components/InfoSection/Data";
+import { projectData, teamData  } from "../components/InfoSection/Data";
 //import CardSection from "../components/Cards/";
 import TimeLine from "../components/TimeLine";
 //import MintSection from "../components/Mint";

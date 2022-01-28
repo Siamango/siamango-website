@@ -56,7 +56,14 @@ const App = () => {
                   <Route exact path="/">
                     <Home connection={connection}/>
                   </Route>
-                  
+                  <Route exact path="/whitelistPresaleMint">
+                    <MintPage 
+                      candyMachineId={candyMachineId}
+                      connection={connection}
+                      startDate={startDateSeed}
+                      txTimeout={txTimeout}
+                      rpcHost={rpcHost}/>
+                  </Route>
                   <Route path="/">
                     <Page404/>
                   </Route>
