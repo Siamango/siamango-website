@@ -18,7 +18,6 @@ export interface MintProps
 {
   candyMachineId?: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
-  startDate: number;
   txTimeout: number;
   rpcHost: string;
 }
@@ -27,9 +26,10 @@ const MintSection = (props: MintProps) =>
 {
     const [isUserMinting, setIsUserMinting] = useState(false);
     const [balance, setBalance] = useState<number>();
-    const [startDate,] = useState(new Date(props.startDate));
+    const [startDate, setDate] = useState(new Date());//'2022-02-01T21:00:00Z'));
     const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
-    const [memberRes, setMemberRes] = useState("");
+    const [num,setnum] = useState(0);
+    const [isActive, setActive] = useState(false);
     const wallet = useWallet();
 
     const [alertState, setAlertState] = useState<AlertState>({
@@ -56,20 +56,28 @@ const MintSection = (props: MintProps) =>
       }, [wallet]);
 
     const refreshCandyMachineState = useCallback(async () => {
+
       if (!anchorWallet) {
           return;
       }
 
       if (props.candyMachineId) {
           try {
-            const cndy = await getCandyMachineState( anchorWallet, props.candyMachineId, props.connection,);
+            const cndy = await getCandyMachineState( anchorWallet, props.candyMachineId, props.connection);
+            const date = new Date(cndy.state.goLiveDate?.toNumber()*1000)
+            console.log(date.toString());
+            setDate(date);
+            setnum(1);
             setCandyMachine(cndy);
+
           } 
           catch (e) {
             console.log('There was a problem fetching Candy Machine state');
             console.log(e);
           }
       }
+
+      
     }, [anchorWallet, props.candyMachineId, props.connection]);
 
     const onMint = async () => {
@@ -145,24 +153,12 @@ const MintSection = (props: MintProps) =>
             setBalance(balance / LAMPORTS_PER_SOL);
           }
         })();
-      if(wallet.connected)
-      {
-          const address = wallet.publicKey?.toBase58();
-
-          fetch(`https://neonclouds.net:5555/api/organization/members?address=`+address,
-          {
-            method: "GET",
-            headers: {
-              "access-control-allow-origin" : "*",
-              "Content-type": "application/json; charset=UTF-8"
-            }
-          }).then(response => response.json()).then(data => setMemberRes(JSON.stringify(data)));
-      }
     }, [wallet.publicKey]);
 
     const [showWalletButton, setButton] = useState(true);
+
     const showButton = () => {
-      if (window.innerWidth <= 1330) {
+      if (window.innerWidth <= 900) {
         setButton(false);
       } else {
         setButton(true);
@@ -171,33 +167,49 @@ const MintSection = (props: MintProps) =>
 
     useEffect(() => {
       showButton();
+      refreshCandyMachineState();
+      const now = new Date();
+        if(startDate < now )
+        {
+          //console.log("set true");
+          setActive(true);
+        }
+        
     }, []);
+
+    window.addEventListener('resize', showButton);
 
     return(
         <MintContainer id="mint">
           {showWalletButton?<WalletButton wallet={wallet} balance={balance}/>:""}
-            {   !candyMachine?.state.isSoldOut
-                ?   !wallet.connected
-                    ?  <ConnectToStart>Connect your wallet to mint </ConnectToStart>
-                    :   candyMachine?.state.isActive
-                        ? memberRes===""
-                          ?
-                            JSON.parse(memberRes).whitelisted
-                            ? (isUserMinting 
-                                ? (<CircularProgress />) 
-                                : (<MintButton onclick={onMint}> MINT YOUR CLOUDY </MintButton>)
-                            )
-                            : <h1>Sorry you can not access pre-sale mint, cause you are not whitelisted. <br/> The public sale is set to 1st of February! <br/> Stay tuned😎</h1>
-                          : (<Countdown
-                                  date={startDate}
-                                  onMount={({ completed }) => completed}
-                                  onComplete={() => {}}
-                                  renderer={renderCounter}
-                              />)
-                        : <CircularProgress />
-                        
-                :   <SoldOut/>
-            }
+          {   
+            !candyMachine?.state.isSoldOut
+            ?  
+                !wallet.connected
+                ?  <ConnectToStart>Connect your wallet to mint </ConnectToStart>
+                :   candyMachine?.state.isActive && isActive
+                    ? (isUserMinting 
+                          ? (<CircularProgress />) 
+                          : (
+                              <>
+                                <h1 style={{textShadow: "0 0px 10px #cd3594"}}>
+                                  { candyMachine?.state.itemsRedeemed < 1069 ? candyMachine?.state.itemsRedeemed+100 : "1169" }/{candyMachine?.state.itemsAvailable}
+                                </h1>
+                                <MintButton onclick={onMint}> MINT YOUR CLOUDY </MintButton>
+                              </>
+                              )
+                      )
+
+                    : (<Countdown
+                        date={startDate}
+                        onMount={({ completed }) => completed}
+                        onComplete={() => {setActive(true); refreshCandyMachineState(); }}
+                        renderer={renderCounter}
+                        key={num}
+                      />)
+                    
+            :   <SoldOut/>
+          }
 
             <Snackbar
                 open={alertState.open}

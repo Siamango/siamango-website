@@ -55,7 +55,7 @@ const Reward = (props: RewardProps) => {
             <Box>
                 <span>
                     <div style={{textAlign:"center", marginTop:"150px"}}>
-                        <h1>Promised:</h1>
+                        <h1>Free mints:</h1>
                         <p style={{fontSize:"8em"}}>
                             {wallet.connected && memberRes!==""?JSON.parse(memberRes).promised:"#"}
                         </p>

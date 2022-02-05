@@ -18,3 +18,4 @@ declare module 'react-vertical-timeline-component';
 //declare module 'react-loading-screen';
 declare module 'websocket';
 declare module 'video-react';
+declare module 'react-sound';

@@ -2,12 +2,12 @@ import * as anchor from "@project-serum/anchor";
 import styled from "styled-components/macro";
 import MintSection from "../components/Mint";
 import img from "../assets/images/logo-compressed.png";
-import video from "../assets/videos/videoSfondo.mp4"
+import video from "../assets/videos/videoSfondo.mp4";
+
 export interface MintPageProps
 {
     candyMachineId?: anchor.web3.PublicKey;
     connection: anchor.web3.Connection;
-    startDate: number;
     txTimeout: number;
     rpcHost: string;
 }
@@ -50,26 +50,22 @@ const MintPageContainer = styled.div`
 
 const MintPage = (props:MintPageProps)=>
 {
-    const psw = prompt('NeonClouds dev');
-
-    if(psw==="siamango")
-        return(
-            <div > 
-                <video className="video-background" loop autoPlay muted playsInline> 
-                    <source src={video} type="video/mp4" />
-                    Browser not supported
-                </video>
-                <MintPageContainer>
-                    <img id="logo" alt ="" src={img}></img>
-                    <div id="title" >
-                        WHITELISTED PRE-SALE MINT
-                    </div>
-                    <MintSection {...props} />
-                </MintPageContainer>
-            </div>
-        );
-    else
-        return(<>WTF man, what are you doing here?</>);
+    
+    return(
+        <div >
+            <video className="video-background" loop autoPlay muted playsInline> 
+                <source src={video} type="video/mp4" />
+                Browser not supported
+            </video>
+            <MintPageContainer>
+                <img id="logo" alt ="" src={img}></img>
+                <div id="title" >
+                    PUBLIC SALE MINT
+                </div>
+                <MintSection {...props} />
+            </MintPageContainer>
+        </div>
+    );
 }
 
 export default MintPage;

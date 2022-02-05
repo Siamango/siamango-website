@@ -2,6 +2,10 @@
 import img1 from "../../assets/images/Cloudies8.gif";
 import img2 from "../../assets/images/Cloudies7.gif";
 import img3 from "../../assets/images/NeonCloudsRadRugsCertificate.png";
+import box from "../../assets/images/info/box.png";
+import rewards from "../../assets/images/info/rewards.png";
+import wallet from "../../assets/images/info/wallet.png";
+import clouds from "../../assets/images/AnimatedCloud.gif";
 
 export const projectData = 
 {
@@ -31,7 +35,7 @@ export const mintData =
     lighTextDesc: true,
     topLine: "The Collection",
     headline: "Ready to get yours?",
-    subtitle: "Public sale is planned on 1st of February, stay tuned.",
+    subtitle: "Plus 60% of collection sold!!!",
     buttonLabel: "Go to mint",
     to: "mint",
     imgStart: true,
@@ -59,4 +63,73 @@ export const teamData =
     dark: false,
     primary: false,
     darkText: true
+}
+
+export const rarityData = 
+{
+    id:"rarity",
+    lightBg: true,
+    lightText: false,
+    lighTextDesc: false,
+    topLine: "Hou rare is your Cloudy?",
+    headline: "Check rarity",
+    subtitle: "Check rarity of your Cloudy, and watch all the items that he has",
+    buttonLabel: "Rarity Page",
+    to: "/rarity",
+    imgStart: false,
+    img: img2,
+    alt: "ART",
+    dark: true,
+    primary: false,
+    darkText: true
+}
+
+export const passiveIncomeData= 
+{
+    id:"passiveIncome",
+    lightBg: true,
+    lightText: false,
+    lighTextDesc: false,
+    imgStart: false,
+    img: rewards,
+    alt: "ART",
+    dark: true,
+    darkText: true
+}
+
+export const DAOgameData= 
+{
+    id:"game",
+    lightBg: false,
+    lightText: true,
+    lighTextDesc: false,
+    imgStart: true,
+    img: box,
+    alt: "ART",
+    dark: false,
+    darkText: false
+}
+export const fundInvestmentData= 
+{
+    id:"investments",
+    lightBg: true,
+    lightText: false,
+    lighTextDesc: false,
+    imgStart: true,
+    img: wallet,
+    alt: "ART",
+    dark: false,
+    darkText: true
+}
+export const deflationaryMechanismData= 
+{
+    id:"cloud",
+    lightBg: false,
+    lightText: true,
+    lighTextDesc: true,
+    imgStart: false,
+    img: clouds,
+    alt: "ART",
+    dark: false,
+    darkText: false
 }

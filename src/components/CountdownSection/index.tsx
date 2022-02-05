@@ -12,7 +12,7 @@ const CountdownSection = ()=>
 
     const [countdownFinished, setFinished] = useState(false);
 
-    const mintDate = new Date(2022,0,29,22);
+    const mintDate = new Date('2022-01-29T21:00:00Z');
     const now = new Date();
 
     if(!countdownFinished && mintDate < now )
@@ -39,7 +39,7 @@ const CountdownSection = ()=>
                             <BtnWrap style={{marginTop:"50px"}}>
                                 {
                                     countdownFinished
-                                    ?   <CollectiveButton2 to=""> GO TO MINT</CollectiveButton2>
+                                    ?   <CollectiveButton2 to="/whitelistpresalemint"> GO TO MINT</CollectiveButton2>
                                     :   <Countdown
                                             date={mintDate}
                                             onMount={({ completed }) => completed }

@@ -19,7 +19,7 @@ const ConnectButton = styled(WalletDialogButton)``;
 
 export interface NavbarProps
 {
-  connection: anchor.web3.Connection;
+  connection?: anchor.web3.Connection;
 }
 
 const Navbar = (props: NavbarProps) => {
@@ -50,12 +50,11 @@ const Navbar = (props: NavbarProps) => {
   
     useEffect(() => {
       showButton();
-
     }, []);
 
     useEffect(() => {
       (async () => {
-        if (wallet?.publicKey) {
+        if (wallet?.publicKey && props.connection) {
           const balance = await props.connection.getBalance(wallet.publicKey);
           setBalance(balance / LAMPORTS_PER_SOL);
         }
@@ -77,65 +76,58 @@ const Navbar = (props: NavbarProps) => {
               <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
             </div>
 
-            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-              <li className='nav-item'>
-                  <Link to='projectCol' className='nav-links' onClick={closeMobileMenuItem}
-                    smooth={true} duration={500} spy={true} offset={-200}>
-                    Project
+            { props.connection
+              ?<ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                <li className='nav-item'>
+                    <Link to='menuContainer' className='nav-links' onClick={closeMobileMenuItem}
+                      smooth={true} duration={500} spy={true} offset={-200}>
+                      Utilities
+                    </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link
+                    to='game'
+                    className='nav-links'
+                    onClick={closeMobileMenuItem}
+                    smooth={true} duration={500} spy={true} offset={-80}
+                  >
+                    Game
                   </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='cloud'
-                  className='nav-links'
-                  onClick={closeMobileMenuItem}
-                  smooth={true} duration={500} spy={true} offset={-80}
-                >
-                  Cloud
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='game'
-                  className='nav-links'
-                  onClick={closeMobileMenuItem}
-                  smooth={true} duration={500} spy={true} offset={-80}
-                >
-                  Game
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='roadmap'
-                  className='nav-links'
-                  onClick={closeMobileMenuItem}
-                  smooth={true} duration={500} spy={true} offset={-80}
-                >
-                  Roadmap
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='team'
-                  className='nav-links'
-                  onClick={closeMobileMenuItem}
-                  smooth={true} duration={500} spy={true} offset={-80}
-                >
-                  Team
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='faqs'
-                  className='nav-links'
-                  onClick={closeMobileMenuItem}
-                  smooth={true} duration={500} spy={true} offset={-80}
-                >
-                  FAQs
-                </Link>
-              </li>
-            
-            </ul>
+                </li>
+                <li className='nav-item'>
+                  <Link
+                    to='roadmap'
+                    className='nav-links'
+                    onClick={closeMobileMenuItem}
+                    smooth={true} duration={500} spy={true} offset={-80}
+                  >
+                    Roadmap
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link
+                    to='team'
+                    className='nav-links'
+                    onClick={closeMobileMenuItem}
+                    smooth={true} duration={500} spy={true} offset={-80}
+                  >
+                    Team
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link
+                    to='faqs'
+                    className='nav-links'
+                    onClick={closeMobileMenuItem}
+                    smooth={true} duration={500} spy={true} offset={-80}
+                  >
+                    FAQs
+                  </Link>
+                </li>
+                
+              </ul>
+              : <div style={{width:"900px"}}/>
+            }
             {button?
               <ul className={click ? 'nav-menu active' : 'nav-menu'} style={{width:"fit-content", justifyContent: "end"}}>
                 <li className='nav-item'>
@@ -188,7 +180,60 @@ const Navbar = (props: NavbarProps) => {
                   </a>
                 </li>
               </ul>
-              :""
+              : props.connection
+                ? ""
+                : <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <li className='nav-item'>
+                      <a 
+                        className="nav-links"
+                        style={{textDecoration: "none"}}
+                        href='https://twitter.com/NeonCloudsNFT'
+                        target='_blank'
+                        rel="noreferrer"
+                        aria-label='Twitter'
+                      >
+                        <i className='fab fa-twitter' />
+                      </a>
+                    </li>
+
+                    <li className='nav-item'>
+                      <a 
+                        className="nav-links"
+                        style={{textDecoration: "none"}}
+                        href='https://instagram.com/NeonCloudsNFT'
+                        target='_blank'
+                        rel="noreferrer"
+                        aria-label='Instagram'
+                      >
+                        <i className='fab fa-instagram' />
+                      </a>
+                    </li>
+
+                    <li className='nav-item'>
+                      <a 
+                        className="nav-links"
+                        href='https://github.com/Siamango'
+                        target='_blank'
+                        rel="noreferrer"
+                        aria-label='GitHub'
+                      >
+                        <i className="fab fa-github"></i>
+                      </a>
+                    </li>
+
+                    <li className='nav-item'>
+                      <a
+                        className="nav-links"
+                        href='https://discord.gg/P8hc8npWRt'
+                        target='_blank'
+                        rel="noreferrer"
+                        aria-label='Discord'
+                      >
+                        <i className="fab fa-discord"></i>
+                      </a>
+                    </li>
+                  </ul>
+
             }
             { button
               ? !wallet.connected

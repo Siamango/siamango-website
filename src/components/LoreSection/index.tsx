@@ -8,11 +8,7 @@ const LoreContainer = styled.div`
     color: #fff;
     background: linear-gradient(-45deg, #7400ff, #d835f5, #239dd5);
     
-    transform-origin: top left;
-    
     background-size: 400% 400%;
-    //transform: skewY(-10deg);
-    transform-origin: top left;
 
     animation: animateBack 18s ease infinite;
 

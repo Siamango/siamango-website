@@ -69,8 +69,8 @@ export const MintContainer = styled.div`
     width: 100%;
     height: fit-content;
     text-align: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 150px;
 `;
 
 const H1 = styled.h1`
@@ -89,6 +89,7 @@ const MintButtonA = styled.a`
 
     position: relative;
     display: inline-block;
+    cursor: pointer;
     padding: 15px 30px;
     border: 2px solid #009fff; //#0f0
     margin: 40px;
