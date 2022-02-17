@@ -20,20 +20,18 @@ import Home from "../pages/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Reward from "../pages/Collective";
 import Page404 from "../pages/404";
-import MintPage from "../pages/Mint";
-import RarityPage from "../pages/Rarity";
 
 
-const candyMachineId = new anchor.web3.PublicKey(
-  process.env.REACT_APP_CANDY_MACHINE_ID!
-);
+//const candyMachineId = new anchor.web3.PublicKey(
+//  process.env.REACT_APP_CANDY_MACHINE_ID!
+//);
 
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
 
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
 const connection = new anchor.web3.Connection(rpcHost);
 
-const txTimeout = 30000; // milliseconds (confirm this works for your project)
+//const txTimeout = 30000; // milliseconds (confirm this works for your project)
 
 const App = () => {
   const endpoint = useMemo(() => clusterApiUrl(network), []);
@@ -56,13 +54,7 @@ const App = () => {
                   <Route exact path="/">
                     <Home connection={connection}/>
                   </Route>
-                  <Route exact path="/mint">
-                    <MintPage 
-                      candyMachineId={candyMachineId}
-                      connection={connection}
-                      txTimeout={txTimeout}
-                      rpcHost={rpcHost}/>
-                  </Route>
+                  
                   
                   <Route path="/">
                     <Page404/>
@@ -79,6 +71,10 @@ const App = () => {
 
 export default App;
 
-  /*<Route exact path="/rarity">
-                    <RarityPage />
+  /*<Route exact path="/mint">
+                    <MintPage 
+                      candyMachineId={candyMachineId}
+                      connection={connection}
+                      txTimeout={txTimeout}
+                      rpcHost={rpcHost}/>
                   </Route>*/

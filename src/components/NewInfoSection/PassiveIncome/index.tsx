@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../Button";
-import GlitchText from "../../Glitch";
-import { BtnWrap, Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../../InfoSection/InfoElements";
+import { Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../../InfoSection/InfoElements";
 
 
 export interface InfoProps{

@@ -3,12 +3,12 @@ import HeroSection from "../components/HeroSection/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import InfoSection from "../components/InfoSection";
-import { DAOgameData, deflationaryMechanismData, fundInvestmentData, mintData, passiveIncomeData, projectData, rarityData, teamData  } from "../components/InfoSection/Data";
+import { DAOgameData, deflationaryMechanismData, fundInvestmentData, passiveIncomeData, teamData} from "../components/InfoSection/Data";
 //import CardSection from "../components/Cards/";
 import TimeLine from "../components/TimeLine";
 //import MintSection from "../components/Mint";
-import CollectiveSection from "../components/CollectiveSections";
-import FloatingCollective from "../components/FloatingButton";
+//import CollectiveSection from "../components/CollectiveSections";
+//import FloatingCollective from "../components/FloatingButton";
 import FaqSection from "../components/Faq";
 import LoreSection from "../components/LoreSection";
 import ListedSection from "../components/ListedSection";
@@ -32,7 +32,7 @@ const Home = (props: HomeProps) => {
       <Navbar connection={props.connection}/>
       <HeroSection />
       <MenuSection/>
-      <InfoSection {...mintData}/>
+      <RaritySection />
       <PassiveIncomeSection {...passiveIncomeData}/>
       <DaoGameSection {...DAOgameData}/>
       <NextGenSection/>
@@ -51,4 +51,4 @@ const Home = (props: HomeProps) => {
 };
 
 export default Home;
-//<FloatingCollective/>
+//<InfoSection {...mintData}/>

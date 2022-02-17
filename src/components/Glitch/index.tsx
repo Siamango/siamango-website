@@ -8,7 +8,7 @@ export interface GlitchPorps
 const GlitchText = (props: GlitchPorps )=>
 {
     return(
-        <GlitchSection fontSize={props.fontSize}>
+        <GlitchSection fontSize={props.fontSize} style={{width:"fit-content", margin:"auto"}}>
             <GlitchSpan aria-hidden="true" >{props.children}</GlitchSpan>
             {props.children}
             <GlitchSpan aria-hidden="true" >{props.children}</GlitchSpan>

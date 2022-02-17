@@ -24,6 +24,7 @@ function Footer() {
               className='social-icon-link twitter'
               href='https://twitter.com/NeonCloudsNFT'
               target='_blank'
+              rel="noreferrer" 
               aria-label='Twitter'
             >
               <i className='fab fa-twitter' />
@@ -33,6 +34,7 @@ function Footer() {
               className='social-icon-link instragram'
               href='https://instagram.com/NeonCloudsNFT'
               target='_blank'
+              rel="noreferrer" 
               aria-label='Twitter'
             >
               <i className='fab fa-instagram' />
@@ -40,8 +42,9 @@ function Footer() {
 
             <a
               className='social-icon-link github'
-              href='https://github.com/Siamango'
+              href='https://github.com/'
               target='_blank'
+              rel="noreferrer" 
               aria-label='GitHub'
             >
               <i className='fab fa-github' />
@@ -51,6 +54,7 @@ function Footer() {
               className='social-icon-link discord'
               href='https://discord.gg/P8hc8npWRt'
               target='_blank'
+              rel="noreferrer" 
               aria-label='Discord'
             >
               <i className='fab fa-discord' />

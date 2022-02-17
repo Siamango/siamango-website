@@ -19,7 +19,7 @@ const CardSection = () =>
                     <Content className="content">
                         <h2>Backend Developer</h2>
                         <p>The only one who actually knows how the f*** The Cloud works and what goes on on the blockchain.</p>
-                        <a href="https://twitter.com/tratteo" target="_blank" > <i className="fab fa-twitter" ></i></a>
+                        <a href="https://twitter.com/tratteo" target="_blank" rel="noreferrer"  > <i className="fab fa-twitter" ></i></a>
                     </Content>
                 </Card>
                 <Card className="card">
@@ -44,7 +44,7 @@ const CardSection = () =>
                     <Content className="content">
                         <h2>Backend Developer<br/>Social Media Manager</h2>
                         <p>Has lost his mental sanity scraping the Solana docs and promoting the Collective on socials</p>
-                        <a href="https://twitter.com/CryptoNickyy?t=DnvdA7sFxObeX1vwPBG8-A&s=08" target="_blank"> <i className="fab fa-twitter" ></i></a>
+                        <a href="https://twitter.com/CryptoNickyy?t=DnvdA7sFxObeX1vwPBG8-A&s=08" target="_blank" rel="noreferrer" > <i className="fab fa-twitter" ></i></a>
                     </Content>
                 </Card>
                 <Card className="card">

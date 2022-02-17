@@ -193,7 +193,7 @@ const MintSection = (props: MintProps) =>
                           : (
                               <>
                                 <h1 style={{textShadow: "0 0px 10px #cd3594"}}>
-                                  { candyMachine?.state.itemsRedeemed < 1069 ? candyMachine?.state.itemsRedeemed+100 : "1169" }/{candyMachine?.state.itemsAvailable}
+                                  {candyMachine?.state.itemsRedeemed }/{candyMachine?.state.itemsAvailable}
                                 </h1>
                                 <MintButton onclick={onMint}> MINT YOUR CLOUDY </MintButton>
                               </>

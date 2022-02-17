@@ -47,12 +47,12 @@ function HeroSection() {
   const handleScroll = () => 
   {
     let logo = document.getElementById('logo')!;
-    let button = document.getElementById('linkButton')!;
+    //let button = document.getElementById('linkButton')!;
     setOffsetY(window.pageYOffset);
     const position = 2 - window.scrollY/500;
     //console.log(position);
     logo.style.opacity = position+"";
-    button.style.opacity = position+"";
+    //button.style.opacity = position+"";
   }
 
 
@@ -67,7 +67,6 @@ function HeroSection() {
   return (
     <div className='hero-container'>
       
-      <ButtonLink id="linkButton" to="collection" style={{ transform: `translateY(${offsetY*0.6}px)`}} smooth={true} duration={500} spy={true} offset={-100}> Mint your Cloudy</ButtonLink>
       <h1 style={{transform: `translateY(${offsetY*0.6}px)`, }} >
         <img id="logo" alt ="" src={text} style={{width:"100%", height:"100%", zIndex:"-10"}}></img>
       </h1>

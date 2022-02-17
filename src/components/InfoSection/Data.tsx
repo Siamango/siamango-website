@@ -65,25 +65,6 @@ export const teamData =
     darkText: true
 }
 
-export const rarityData = 
-{
-    id:"rarity",
-    lightBg: true,
-    lightText: false,
-    lighTextDesc: false,
-    topLine: "Hou rare is your Cloudy?",
-    headline: "Check rarity",
-    subtitle: "Check rarity of your Cloudy, and watch all the items that he has",
-    buttonLabel: "Rarity Page",
-    to: "/rarity",
-    imgStart: false,
-    img: img2,
-    alt: "ART",
-    dark: true,
-    primary: false,
-    darkText: true
-}
-
 export const passiveIncomeData= 
 {
     id:"passiveIncome",

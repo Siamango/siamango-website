@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
+
 import GlitchText from '../Glitch';
 import solLogo from "../../assets/images/solanaLogo.png"
 import { InfoContainer, InfoWrapper, InfoRow, Column1,Column2,TextWrapper,TopLine,Heading,Subtitle,ImgWrap,Img, BtnWrap} from './InfoElements';
 import CardSection from '../Cards';
-import { Counter, CounterContainer } from '../CountdownSection/CountdownElements';
-import Countdown from 'react-countdown';
 import { Button } from '../Button';
 import { CollectiveButton2 } from '../CollectiveSections/CollectiveSectionElements';
 

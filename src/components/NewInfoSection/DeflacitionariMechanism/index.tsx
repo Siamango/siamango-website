@@ -1,6 +1,7 @@
 import { Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../../InfoSection/InfoElements";
 import styled from "styled-components/macro";
-import GlitchText from "../../Glitch";
+import map from "../../../assets/images/info/NeonCloudsMap.png"
+
 
 export interface InfoProps{
     lightBg:any;
@@ -24,11 +25,20 @@ const UL = styled.ul`
     }
 `;
 
+const MapImg = styled.img`
+    max-width: 1100px;
+
+    @media screen and (max-width: 1100px)
+    {
+        width:90%;
+    }
+`;
+
 const DeflationarySection = (props:InfoProps)=> 
 {
     return (
         <InfoContainer lightBg={props.lightBg} id ={props.id} >
-            <InfoWrapper style={{height:"fit-content", paddingTop:"50px", paddingBottom:"50px"}}>
+            <InfoWrapper style={{height:"fit-content", paddingTop:"50px"}}>
                 <TopLine>The cloud</TopLine>
                 <Heading lightText={props.lightText}>
                     Deflationary mechanism: The Cloud
@@ -60,6 +70,7 @@ const DeflationarySection = (props:InfoProps)=>
                 After enough mints will have been burned, a next-gen collection will be introduced into the market with a second minting process in which Neon Clouds holders will be automatically whitelisted.
                 This introduces new value into the environment, <span style={{color:"#009fff", width:"fit-content"}}>rewarding diamond hands holders</span> and supplying the market with a fresh new form of art.
                 </div>
+                <MapImg src={map}/>
             </InfoWrapper>
         </InfoContainer>
     );

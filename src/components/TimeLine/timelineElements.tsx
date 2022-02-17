@@ -22,7 +22,7 @@ export const timelineElements = [
       "Public minting of 1269 Cloudies",
       "The Cloud is charged with 10% of the minting revenue",
       "Verification on secondary marketplaces",
-      
+      "The Cloud starts zapping floor price Cloudies",
     ],
   },
   {
@@ -31,9 +31,9 @@ export const timelineElements = [
     title: "WHAT NEXT",
     date: "Q2 2022",
     description: [
-      "The Cloud starts zapping floor price Cloudies",
       "Development of the tools to manage the DAO",
-      "Minting of the next-gen collection",
+      "Game development and demo release",
+      "Airdrop of the Gen1 collection to all Gen0 holders"
     ],
   },
   {
@@ -42,9 +42,9 @@ export const timelineElements = [
     title: "NEXT GEN",
     date: "Q3 2022",
     description: [
-      "Set up and execution of DAO investments",
       "Polishing core mechanics of our game by collaborating with the DAO",
       "Release of the demo version of our game",
+      "Development of the staking system",
     ],
   },
   {
@@ -53,6 +53,8 @@ export const timelineElements = [
     title: "GAME DEVELOPMENT",
     date: "Q4 2022",
     description: [
+      "Mint of the Gen2 collection",
+      "Set up and execution of DAO investments",
       "Game development feedback from the DAO",
       "Creation of the alpha/beta version of the game",
     ],
@@ -63,8 +65,9 @@ export const timelineElements = [
     title: "GAME RELEASE",
     date: "Q1 2023",
     description: [
-      "Release of the stable version",
-      "Distributing in game rewards to Neon Cloud diamond hands holders",
+      "Release of the stable version, Gen2 characters will be playable in game",
+      "Investments and royalties will sustain our ecosystem",
+      "Earnings distribution to The Collective members",
     ],
   },
   {

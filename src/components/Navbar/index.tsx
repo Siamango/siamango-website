@@ -6,6 +6,7 @@ import { WalletDialogButton, WalletDisconnectButton } from "@solana/wallet-adapt
 import { Link , animateScroll as scroll} from "react-scroll";
 import { useState, useEffect } from "react";
 import * as anchor from "@project-serum/anchor";
+//import pdf from '../../assets/Whitepaper.pdf';
 
 //icon
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
@@ -16,6 +17,8 @@ import {
 } from "../../candy-machine";
 
 const ConnectButton = styled(WalletDialogButton)``;
+
+
 
 export interface NavbarProps
 {
@@ -124,6 +127,16 @@ const Navbar = (props: NavbarProps) => {
                     FAQs
                   </Link>
                 </li>
+                <li className='nav-item'>
+                  <a
+                    href="../assets/Whitepaper.pdf"
+                    download
+                    className='nav-links'
+                    onClick={closeMobileMenuItem}
+                  >
+                    Whitepapaer
+                  </a>
+                </li>
                 
               </ul>
               : <div style={{width:"900px"}}/>
@@ -159,7 +172,7 @@ const Navbar = (props: NavbarProps) => {
                 <li className='nav-item'>
                   <a 
                     className="nav-links"
-                    href='https://github.com/Siamango'
+                    href='https://github.com/'
                     target='_blank'
                     rel="noreferrer"
                     aria-label='GitHub'
@@ -212,7 +225,7 @@ const Navbar = (props: NavbarProps) => {
                     <li className='nav-item'>
                       <a 
                         className="nav-links"
-                        href='https://github.com/Siamango'
+                        href='https://github.com/'
                         target='_blank'
                         rel="noreferrer"
                         aria-label='GitHub'

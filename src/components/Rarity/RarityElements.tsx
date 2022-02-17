@@ -15,7 +15,7 @@ export const RarityForm = styled.form`
     & input
     {
         font-size: 20px;
-        width: 50%;
+        width: auto;
         max-width: 800px;
         padding: 10px 30px;
         margin: 10px 30px;

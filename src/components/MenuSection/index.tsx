@@ -53,7 +53,7 @@ const MenuSection = () =>
                         <h1>
                             Passive Income
                         </h1>
-                        <img src={reward} height="60"style={{marginRight:"30px"}}/>
+                        <img src={reward} height="60"style={{marginRight:"30px"}} alt="passiveIncome"/>
                     </MenuBox>
                 </Link>
                 <Link to="game" smooth={true} duration={500} spy={true} offset={-80}>
@@ -61,7 +61,7 @@ const MenuSection = () =>
                         <h1>
                             DAO Game Development
                         </h1>
-                        <img src={game} height="60"style={{marginRight:"30px"}}/>
+                        <img src={game} height="60"style={{marginRight:"30px"}} alt="gameDAO"/>
                     </MenuBox>
                 </Link>
                 <Link to="investments" smooth={true} duration={500} spy={true} offset={-80}>
@@ -69,7 +69,7 @@ const MenuSection = () =>
                         <h1>
                             Community Fund
                         </h1>
-                        <img src={wallet} height="60" style={{marginRight:"30px"}}/>
+                        <img src={wallet} height="60" style={{marginRight:"30px"}} alt="fund"/>
                     </MenuBox>
                 </Link>
                 <Link to="cloud" smooth={true} duration={500} spy={true} offset={-80}>
@@ -77,7 +77,7 @@ const MenuSection = () =>
                         <h1>
                             Deflationary Mechanism
                         </h1>
-                        <img src={cloud} height="70" style={{marginRight:"20px"}}/>
+                        <img src={cloud} height="70" style={{marginRight:"20px"}} alt="deflactionary"/>
                     </MenuBox>
                 </Link>
             </BoxContainer>
