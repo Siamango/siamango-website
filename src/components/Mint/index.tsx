@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {ConnectToStart, Counter, CounterContainer, MintButton, MintContainer, SoldOut} from "./MintElemtes";
+
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Countdown from "react-countdown";
@@ -90,7 +91,8 @@ const MintSection = (props: MintProps) =>
               )[0];
       
               let status: any = { err: true };
-              if (mintTxId) {
+              if (mintTxId) 
+              {
                 status = await awaitTransactionSignatureConfirmation(
                   mintTxId,
                   props.txTimeout,

@@ -17,9 +17,10 @@ import {
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 
 import Home from "../pages/Home";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Reward from "../pages/Collective";
 import Page404 from "../pages/404";
+import TransactionTest from "../pages/prova";
 
 
 //const candyMachineId = new anchor.web3.PublicKey(
@@ -43,23 +44,18 @@ const App = () => {
           <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect>
               <WalletDialogProvider>
-                <Switch>
+                <Routes>
                   {window.location.host.split('.')[0] === 'collective'?
-                    <Route path="/">
-                      <Reward connection={connection}/>
-                    </Route>
+                    <Route path="/" element={<TransactionTest connection={connection}/>}/>
                     
-                  : ""
+                    : ""
                   }
-                  <Route exact path="/">
-                    <Home connection={connection}/>
-                  </Route>
+                  <Route path="/" element={ <Home connection={connection}/>}/>
+                   
                   
                   
-                  <Route path="/">
-                    <Page404/>
-                  </Route>
-                </Switch>
+                  
+                </Routes>
               </WalletDialogProvider>
             </WalletProvider>
           </ConnectionProvider>
@@ -71,7 +67,11 @@ const App = () => {
 
 export default App;
 
-  /*<Route exact path="/mint">
+  /*<Route path="/">
+                    <Page404/>
+                  </Route>
+  
+  <Route exact path="/mint">
                     <MintPage 
                       candyMachineId={candyMachineId}
                       connection={connection}

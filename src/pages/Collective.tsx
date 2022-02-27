@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 import * as anchor from "@project-serum/anchor";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import web3 from "@solana/web3.js";
 
 import logo from "../assets/images/logo-compressed.png";
 
@@ -28,7 +28,7 @@ const Reward = (props: RewardProps) => {
         (async () => {
             if (wallet?.publicKey) {
               const balance = await props.connection.getBalance(wallet.publicKey);
-              setBalance(balance / LAMPORTS_PER_SOL);
+              setBalance(balance / web3.LAMPORTS_PER_SOL);
             }
           })();
         if(wallet.connected)
