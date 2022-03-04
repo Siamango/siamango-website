@@ -44,27 +44,10 @@ const stakeTransaction = async (connection:anchor.web3.Connection, mint : string
 
     if(response.value.err===null)
     {
-        const addres = wallet.publicKey;
-
-        const params = "{ \"owner\":\""+addres+"\" , \"mint\":\""+ mint+"\"}";
-
-        await fetch("http://localhost:5000/record/add", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: params,
-        })
-        .catch(error => {
-            window.alert(error);
-            return;
-        });
-
-        setNFTS( nfts.filter(nft => {return  JSON.parse(JSON.stringify(nft)).info.mint !== mint.toString() } ));
-        getStakedNFTsOnDB();
-        setTimeout(()=>{getNFTs(); },20000);
-
+        return true;
     }
+
+    return false;
 }
 
 export default stakeTransaction;

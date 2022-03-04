@@ -15,6 +15,7 @@ import { getOrCreateAssociatedTokenAccount } from "../components/TransactionUtil
 import mintList from "../assets/hashlist.json";
 import bs58 from "bs58";
 import stakeTransaction from "../components/TransactionUtility/StakeTransaction";
+import unstakeTransaction from "../components/TransactionUtility/UnstakeTransaction";
 
 export interface RewardProps
 {
@@ -31,83 +32,6 @@ const TransactionTest = (props: RewardProps) => {
 
     const wallet = useWallet();
 
-    
-
-    const unstakeTransaction = async (mint:string) =>
-    {
-        if (!wallet.publicKey) throw new WalletNotConnectedError();
-        if (!wallet.signTransaction) throw new WalletNotConnectedError();
-        console.log(mint);
-        var fromWallet = web3.Keypair.fromSecretKey(bs58.decode(process.env.REACT_APP_PRIVATE_KEY!));
-
-        var myToken = new Token(
-            props.connection,
-            new web3.PublicKey(mint),
-            TOKEN_PROGRAM_ID,
-            fromWallet
-        );
-        // Create associated token accounts for my token if they don't exist yet
-        var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-            fromWallet.publicKey
-        );
-
-        var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-            wallet.publicKey
-        )
-        // Add token transfer instructions to transaction
-        var transaction = new web3.Transaction()
-            .add(
-            Token.createTransferInstruction(
-                TOKEN_PROGRAM_ID,
-                fromTokenAccount.address,
-                toTokenAccount.address,
-                fromWallet.publicKey,
-                [],
-                1
-            )
-        );
-        
-        // Sign transaction, broadcast, and confirm
-        /*var signature = await web3.sendAndConfirmTransaction(
-            props.connection,
-            transaction,
-            [fromWallet]
-        );*/
-        const blockHash = await props.connection.getRecentBlockhash();
-        transaction.recentBlockhash = await blockHash.blockhash;
-        transaction.feePayer = wallet.publicKey; 
-        transaction.partialSign(fromWallet);
-
-        const signature = await wallet.sendTransaction(transaction, props.connection);
-        const response = await props.connection.confirmTransaction(signature, 'processed');
-        console.log('response', response);
-
-        if(response.value.err===null)
-          {
-            const addres = wallet.publicKey;
-
-            const params = "{ \"owner\":\""+addres+"\" , \"mint\":\""+ mint+"\"}";
-
-            await fetch("http://localhost:5000/record/"+mint, {
-                method: "DELETE",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: params,
-            })
-            .catch(error => {
-                window.alert(error);
-                return;
-            });
-
-            setNFTS( nfts.filter(nft => {return  JSON.parse(JSON.stringify(nft)).info.mint !== mint.toString() } ));
-            getStakedNFTsOnDB();
-            setTimeout(()=>{getNFTs(); },20000);
-
-          }
-        
-    }
-
     useEffect( () => {
         (async () => {
             if (wallet?.publicKey) {
@@ -122,7 +46,7 @@ const TransactionTest = (props: RewardProps) => {
 
     useEffect(()=>{ 
         //if(stakeNfts.length>0)
-            getStakedNFTs()
+            getMetaStakedNFTs()
     },[stakeMint]);
 
     const getNFTs = async () => {
@@ -147,7 +71,7 @@ const TransactionTest = (props: RewardProps) => {
         setNFTS(await Promise.all(nftsBinded));
     }
     
-    const getStakedNFTs = async () => 
+    const getMetaStakedNFTs = async () => 
     {
         if (!wallet.publicKey) return;
 
@@ -165,7 +89,13 @@ const TransactionTest = (props: RewardProps) => {
 
     const getStakedNFTsOnDB = async ()=>
     {
-        const response = await fetch(`http://localhost:5000/record/`+wallet.publicKey);
+        const response = await fetch(`https://neonclouds.net:4242/api/staking?owner=`+wallet.publicKey,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "access-control-allow-origin" : "*",
+                "Api-Key": process.env.REACT_APP_API_KEY!,
+            }});
  
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`;
@@ -175,9 +105,74 @@ const TransactionTest = (props: RewardProps) => {
     
         const records = await response.json();
 
-        //console.log(records);
-
         setStakeMint(records);
+    }
+
+    const stake = (mint:string) =>
+    {
+        stakeTransaction(
+            props.connection,
+            mint,
+            wallet,
+        ).then(async (res)=>
+            {
+                if(res)
+                {
+                    const addres = wallet.publicKey;
+    
+                    const params = "{ \"owner\":\""+addres+"\" , \"mint\":\""+ mint+"\"}";
+    
+                    await fetch("https://neonclouds.net:4242/api/staking/", {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "access-control-allow-origin" : "*",
+                            "Api-Key":process.env.REACT_APP_API_KEY!
+                        },
+                        body: params,
+                        })
+                        .catch(error => {
+                            window.alert("ADD ERROR:"+error);
+                            return;
+                        });
+    
+                    setNFTS( nfts.filter(nft => {return  JSON.parse(JSON.stringify(nft)).info.mint !== mint.toString() } ));
+                    getStakedNFTsOnDB();
+                    setTimeout(()=>{getNFTs(); },20000);
+
+                }
+
+            }
+
+        );
+    }
+
+    const unstake = (mint:string)=>
+    {
+        unstakeTransaction(
+            props.connection,
+            mint,
+            wallet,
+        ).then(async (res)=>
+            {
+                if(res)
+                {
+                    await fetch(`https://neonclouds.net:4242/api/staking?mint=`+mint,{
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "access-control-allow-origin" : "*",
+                            "Api-Key": process.env.REACT_APP_API_KEY!,
+                        }}).catch(error => {
+                            window.alert("ADD ERROR:"+error);
+                            return;
+                        });
+
+                    getStakedNFTsOnDB();
+                    
+                }
+            }
+        );
     }
 
     return (
@@ -192,11 +187,7 @@ const TransactionTest = (props: RewardProps) => {
                 (
                     nfts.map(nft => {
                         return(
-                            <a onClick={()=>stakeTransaction(
-                                                props.connection,
-                                                JSON.parse(JSON.stringify(nft)).info.mint,
-                                                wallet,
-                                            )
+                            <a onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)
                             }>
                                 <img src={JSON.parse(JSON.stringify(nft)).meta.image} width="130px"/>
                             </a>
@@ -215,7 +206,7 @@ const TransactionTest = (props: RewardProps) => {
                     stakeNfts.map(nft=>{
                         //console.log(JSON.parse(JSON.stringify(nft)).info.data.mint);
                         return(
-                            <a onClick={()=>unstakeTransaction(JSON.parse(JSON.stringify(nft)).info.data.mint)}><img src={JSON.parse(JSON.stringify(nft)).meta.image} width="130px"/></a>
+                            <a onClick={()=>unstake(JSON.parse(JSON.stringify(nft)).info.data.mint)}><img src={JSON.parse(JSON.stringify(nft)).meta.image} width="130px"/></a>
                         );   
                     })
                 :
