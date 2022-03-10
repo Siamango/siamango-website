@@ -19,7 +19,7 @@ export const timelineElements = [
     description: [
       "Developing of core tools (Rarity tool, Discord bot)",
       "Whitelist minting of 300 Cloudies",
-      "Public minting of 1269 Cloudies",
+      "Public minting of 1250 Cloudies",
       "The Cloud is charged with 10% of the minting revenue",
       "Verification on secondary marketplaces",
       "The Cloud starts zapping floor price Cloudies",

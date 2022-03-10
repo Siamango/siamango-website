@@ -1,21 +1,23 @@
 
-import { WalletButton, CollectiveBody, LinkToHome, } from "../components/Collective/CollectiveElements";
+import { WalletButton, LinkToHome, } from "../components/Collective/CollectiveElements";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import Alert from "@material-ui/lab/Alert";
 
 import * as anchor from "@project-serum/anchor";
 import * as web3 from "@solana/web3.js";
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 
 import logo from "../assets/images/logo-compressed.png";
-import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { getOrCreateAssociatedTokenAccount } from "../components/TransactionUtility/GetOrCreateAssosiatedTokenAccount";
 
 import mintList from "../assets/hashlist.json";
-import bs58 from "bs58";
 import stakeTransaction from "../components/TransactionUtility/StakeTransaction";
 import unstakeTransaction from "../components/TransactionUtility/UnstakeTransaction";
+import NFTCard from "../components/Staking/NFTCard";
+import { StakingBody } from "../components/Staking/StakingPageElements";
+import { NFTCardContainer } from "../components/Staking/NFTCard/NFTCardElements";
+import GlitchText from "../components/Glitch";
+import { Snackbar } from "@material-ui/core";
 
 export interface RewardProps
 {
@@ -23,12 +25,24 @@ export interface RewardProps
     children?:any;
 }
 
+interface AlertState 
+{
+    open: boolean;
+    message: string;
+    severity: "success" | "info" | "warning" | "error" | undefined;
+}
+
 const TransactionTest = (props: RewardProps) => {
     
     const [balance, setBalance] = useState<number>();
-    const [nfts, setNFTS] = useState([{}]);
+    const [walletNfts, setNFTS] = useState([{}]);
     const [stakeNfts, setStakeNfts] = useState([{}]);
     const [stakeMint, setStakeMint] = useState([]);
+    const [alertState, setAlertState] = useState<AlertState>({
+        open: false,
+        message: "",
+        severity: undefined,
+      });
 
     const wallet = useWallet();
 
@@ -69,6 +83,7 @@ const TransactionTest = (props: RewardProps) => {
         })
 
         setNFTS(await Promise.all(nftsBinded));
+        console.log(walletNfts.length);
     }
     
     const getMetaStakedNFTs = async () => 
@@ -119,7 +134,6 @@ const TransactionTest = (props: RewardProps) => {
                 if(res)
                 {
                     const addres = wallet.publicKey;
-    
                     const params = "{ \"owner\":\""+addres+"\" , \"mint\":\""+ mint+"\"}";
     
                     await fetch("https://neonclouds.net:4242/api/staking/", {
@@ -136,10 +150,24 @@ const TransactionTest = (props: RewardProps) => {
                             return;
                         });
     
-                    setNFTS( nfts.filter(nft => {return  JSON.parse(JSON.stringify(nft)).info.mint !== mint.toString() } ));
+                    setNFTS( walletNfts.filter(nft => {return  JSON.parse(JSON.stringify(nft)).info.mint !== mint.toString() } ));
                     getStakedNFTsOnDB();
                     setTimeout(()=>{getNFTs(); },20000);
 
+                    setAlertState({
+                        open: true,
+                        message: 'Congratulations! Stake succeeded!',
+                        severity: 'success',
+                      });
+
+                }
+                else
+                {
+                    setAlertState({
+                        open: true,
+                        message: 'Stake failed! Please try again!',
+                        severity: 'error',
+                      });
                 }
 
             }
@@ -169,51 +197,77 @@ const TransactionTest = (props: RewardProps) => {
                         });
 
                     getStakedNFTsOnDB();
-                    
+
+                    setTimeout(()=>{getNFTs(); },20000);
+
+                    setAlertState({
+                        open: true,
+                        message: 'Congratulations! Unstake succeeded! (Wait ~20 sec to see your nft inside wallet)',
+                        severity: 'success',
+                      });
+
+                }
+                else
+                {
+                    setAlertState({
+                        open: true,
+                        message: 'Unstake failed! Please try again!',
+                        severity: 'error',
+                      });
                 }
             }
         );
     }
 
     return (
-        <CollectiveBody>
+        <StakingBody>
             <LinkToHome href="https://neonclouds.net"><img src={logo} alt="" style={{position:"fixed", top:"-20px", left:"0", width:"300px"}}/></LinkToHome>
             
             <WalletButton wallet={wallet} balance={balance}/>
 
-            INSIDE WALLET
-            {
-                JSON.stringify(nfts[0]) !== "{}" ?
-                (
-                    nfts.map(nft => {
-                        return(
-                            <a onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)
-                            }>
-                                <img src={JSON.parse(JSON.stringify(nft)).meta.image} width="130px"/>
-                            </a>
-                        );
-                    })
-                )
-                :
-                (
-                    ""
-                )
-            }
+            <NFTCardContainer>
+                <h1 style={{color:"#009fff"}}>NFT INSIDE WALLET</h1>
+                {
+                    JSON.stringify(walletNfts[0]) !== "{}" && walletNfts.length>0?
+                    (
+                        walletNfts.map(nft => {
+                            console.log(nft);
+                            return(<NFTCard nft={nft} onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)} label="Stake"/>);
+                        })
+                    )
+                    :
+                    (
+                        <GlitchText fontSize="40px">Empty wallet</GlitchText>
+                    )
+                }
 
-            MINT STAKED
-            {
-                JSON.stringify(stakeNfts[0]) !== "{}"?
-                    stakeNfts.map(nft=>{
-                        //console.log(JSON.parse(JSON.stringify(nft)).info.data.mint);
-                        return(
-                            <a onClick={()=>unstake(JSON.parse(JSON.stringify(nft)).info.data.mint)}><img src={JSON.parse(JSON.stringify(nft)).meta.image} width="130px"/></a>
-                        );   
-                    })
-                :
-                    "empty"
-            }
-            
-        </CollectiveBody>
+                <h1 style={{color:"#009fff"}}>NFT STAKED</h1>
+                {
+                    JSON.stringify(stakeNfts[0]) !== "{}" && stakeNfts.length>0?
+                        stakeNfts.map(nft=>{
+                            return(<NFTCard nft={nft} onClick={()=>unstake(JSON.parse(JSON.stringify(nft)).info.data.mint)} label="Unstake"/>);
+                        })
+                    :
+                        <GlitchText fontSize="40px">No NFT staked</GlitchText>
+                }
+            </NFTCardContainer>
+
+
+            <Snackbar
+                open={alertState.open}
+                autoHideDuration={6000}
+                onClose={() => setAlertState({ ...alertState, open: false })}
+                
+            >
+                <Alert
+                    onClose={() => setAlertState({ ...alertState, open: false })}
+                    severity={alertState.severity}
+                    style={alertState.severity==="error"?{backgroundColor:"red"}:{backgroundColor:"green"}}
+                >
+                    {alertState.message}
+                </Alert>
+            </Snackbar>
+        </StakingBody>
     );
 };
 

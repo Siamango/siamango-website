@@ -2,7 +2,6 @@ import * as anchor from "@project-serum/anchor";
 import * as web3 from "@solana/web3.js";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { getOrCreateAssociatedTokenAccount } from "./GetOrCreateAssosiatedTokenAccount";
 import bs58 from "bs58";
 
 const unstakeTransaction = async (connection:anchor.web3.Connection, mint : string, wallet:any) =>
@@ -50,14 +49,22 @@ const unstakeTransaction = async (connection:anchor.web3.Connection, mint : stri
     transaction.feePayer = wallet.publicKey; 
     transaction.partialSign(fromWallet);
 
-    const signature = await wallet.sendTransaction(transaction, connection);
-    const response = await connection.confirmTransaction(signature, 'processed');
-    console.log('response', response);
-
-    if(response.value.err===null)
+    try
     {
-        return true;
+        const signature = await wallet.sendTransaction(transaction, connection);
+        const response = await connection.confirmTransaction(signature, 'processed');
+        console.log('response', response);
+    
+        if(response.value.err===null)
+        {
+            return true;
+        }
     }
+    catch (e)
+    {
+        console.error("Error: " + e);
+    }
+
     return false;
     
 }

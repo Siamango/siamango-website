@@ -38,13 +38,21 @@ const stakeTransaction = async (connection:anchor.web3.Connection, mint : string
         )
     );
     
-    const signature = await wallet.sendTransaction(transaction, connection);
-    const response = await connection.confirmTransaction(signature, 'processed');
-    console.log('response', response);
 
-    if(response.value.err===null)
+    try
     {
-        return true;
+        const signature = await wallet.sendTransaction(transaction, connection);
+        const response = await connection.confirmTransaction(signature, 'processed');
+        console.log('response', response);
+    
+        if(response.value.err===null)
+        {
+            return true;
+        }
+    }
+    catch (e)
+    {
+        console.error("Error: "+e);
     }
 
     return false;

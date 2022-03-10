@@ -31,7 +31,7 @@ const FaqSection = () => {
           </Question>
           <Answer id="answer1" style={{ maxHeight: "0px" }}>
             <p>
-              There will be 1569 Cloudies. After minting, The Cloud will begin
+              There will be 1250 Cloudies. After minting, The Cloud will begin
               its zapping process.
             </p>
           </Answer>

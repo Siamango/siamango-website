@@ -52,9 +52,6 @@ const App = () => {
                   }
                   <Route path="/" element={ <Home connection={connection}/>}/>
                    
-                  
-                  
-                  
                 </Routes>
               </WalletDialogProvider>
             </WalletProvider>
