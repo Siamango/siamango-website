@@ -83,7 +83,7 @@ const TransactionTest = (props: RewardProps) => {
         })
 
         setNFTS(await Promise.all(nftsBinded));
-        console.log(walletNfts.length);
+        //console.log(walletNfts.length);
     }
     
     const getMetaStakedNFTs = async () => 
@@ -231,7 +231,7 @@ const TransactionTest = (props: RewardProps) => {
                     JSON.stringify(walletNfts[0]) !== "{}" && walletNfts.length>0?
                     (
                         walletNfts.map(nft => {
-                            console.log(nft);
+                            //console.log(nft);
                             return(<NFTCard nft={nft} onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)} label="Stake"/>);
                         })
                     )

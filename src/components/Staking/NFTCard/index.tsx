@@ -17,7 +17,7 @@ const NFTCard = (props:NFTCardProps) =>
     if(!req)
     {
         setReq(true);
-        fetch(`https://neonclouds.net:5555/api/collection/info?id=`+name.substring(name.indexOf("#")+1),{
+        fetch(`https://neonclouds.net:4242/api/gen0?id=`+name.substring(name.indexOf("#")+1),{
             method: "GET",
             headers: {
                 "access-control-allow-origin" : "*",
@@ -25,13 +25,14 @@ const NFTCard = (props:NFTCardProps) =>
             }}).then(response => response.json())
         .then(data => 
             {
+                //console.log(data.rarity.percentage);
                 if(JSON.stringify(JSON.parse(JSON.stringify(data)).rarity)==="null")
                 {
                     setRarity("Err");
                     console.log("Errore");
                 }
                 else
-                    setRarity(JSON.stringify(data));
+                    setRarity(JSON.stringify(data.rarity.percentage));
                     
                 //console.log(data);
                 //console.log(JSON.stringify(JSON.parse(JSON.stringify(data)).rarity)); 
@@ -56,7 +57,7 @@ const NFTCard = (props:NFTCardProps) =>
 
                 <h2> Rarity:<br/>
                     {   rarityData!=="" && !loading && rarityData!=="Err"
-                        ?   JSON.parse(JSON.stringify(JSON.parse(rarityData).rarity)).top_percentage.toFixed(2)
+                        ?   Number(rarityData).toFixed(2)
                         :   ""
                     } %
 
