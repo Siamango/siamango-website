@@ -3,7 +3,7 @@ import HeroSection from "../components/HeroSection/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import InfoSection from "../components/InfoSection";
-import { DAOgameData, deflationaryMechanismData, fundInvestmentData, passiveIncomeData, teamData} from "../components/InfoSection/Data";
+import { DAOgameData, deflationaryMechanismData, fundInvestmentData, mintData, passiveIncomeData, teamData} from "../components/InfoSection/Data";
 //import CardSection from "../components/Cards/";
 import TimeLine from "../components/TimeLine";
 //import MintSection from "../components/Mint";
@@ -19,6 +19,7 @@ import PassiveIncomeSection from "../components/NewInfoSection/PassiveIncome";
 import DaoGameSection from "../components/NewInfoSection/DAOGame";
 import FundInvestmentsSection from "../components/NewInfoSection/FundInvestments";
 import DeflationarySection from "../components/NewInfoSection/DeflacitionariMechanism";
+import CountdownSection from "../components/CountdownSection";
 
 
 export interface HomeProps {
@@ -32,7 +33,7 @@ const Home = (props: HomeProps) => {
       <Navbar connection={props.connection}/>
       <HeroSection />
       <MenuSection/>
-      <RaritySection />
+      <CountdownSection/>
       <PassiveIncomeSection {...passiveIncomeData}/>
       <DaoGameSection {...DAOgameData}/>
       <NextGenSection/>
@@ -43,6 +44,7 @@ const Home = (props: HomeProps) => {
       <ListedSection/>
       <TimeLine />
       <InfoSection {...teamData}/>
+      <RaritySection />
       <FaqSection/>
       
       <Footer/>

@@ -27,7 +27,7 @@ const MintSection = (props: MintProps) =>
 {
     const [isUserMinting, setIsUserMinting] = useState(false);
     const [balance, setBalance] = useState<number>();
-    const [startDate, setDate] = useState(new Date());//'2022-02-01T21:00:00Z'));
+    const [startDate, setDate] = useState(new Date('2022-04-29T21:00:00Z'));
     const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
     const [num,setnum] = useState(0);
     const [isActive, setActive] = useState(false);

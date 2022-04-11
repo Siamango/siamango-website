@@ -2,7 +2,7 @@ import * as anchor from "@project-serum/anchor";
 import styled from "styled-components/macro";
 import MintSection from "../components/Mint";
 import img from "../assets/images/logo-compressed.png";
-import video from "../assets/videos/videoSfondo.mp4";
+import video from "../assets/videos/glitch.mp4";
 
 export interface MintPageProps
 {
@@ -18,6 +18,7 @@ const MintPageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #000000aa;
 
     img
     {
@@ -58,11 +59,11 @@ const MintPage = (props:MintPageProps)=>
                 Browser not supported
             </video>
             <MintPageContainer>
-                <img id="logo" alt ="" src={img}></img>
-                <div id="title" >
-                    PUBLIC SALE MINT
-                </div>
-                <MintSection {...props} />
+                    <img id="logo" alt ="" src={img}></img>
+                    <div id="title" >
+                        FREE MINT
+                    </div>
+                    <MintSection {...props} />
             </MintPageContainer>
         </div>
     );

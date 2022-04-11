@@ -2,7 +2,7 @@ import { useState } from "react";
 import Countdown from "react-countdown";
 import { BtnWrap, Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../InfoSection/InfoElements";
 import { Counter, CounterContainer } from "./CountdownElements";
-import img from "../../assets/images/Cloudies7.gif"
+import img from "../../assets/images/glitchCloudy.gif"
 import GlitchText from "../Glitch";
 import solLogo from "../../assets/images/solanaLogo.png"
 import {CollectiveButton2} from "../CollectiveSections/CollectiveSectionElements"
@@ -12,7 +12,7 @@ const CountdownSection = ()=>
 
     const [countdownFinished, setFinished] = useState(false);
 
-    const mintDate = new Date('2022-01-29T21:00:00Z');
+    const mintDate = new Date('2022-04-29T21:00:00Z');
     const now = new Date();
 
     if(!countdownFinished && mintDate < now )
@@ -26,20 +26,21 @@ const CountdownSection = ()=>
                 <InfoRow imgStart={true}>
                     <Column1 id={"presaleCol"}>
                         <TextWrapper id={"presaleText"}>
-                            <TopLine >Whitelist</TopLine>
+                            <TopLine >Free mint</TopLine>
                             <Heading lightText={true}>
-                               <GlitchText> Whitelist pre-sale opening </GlitchText>
+                               <GlitchText> Don't miss your free Cloudy! </GlitchText>
                             </Heading>
                             <Subtitle darkText={false}>
-                                If you are not whitelisted yet, go to our social pages and do not miss the chance to be whitelisted in order to buy a Cloudy before everybody and at a discouted price.
+                            Free mint of 1250 Cloudy for gen0 Cloudy holders.
                             </Subtitle>
-                            <TopLine >Presale</TopLine>
-                            29th January 2022 <br/> Price: 0.35 <img src={solLogo} style={{width:"16px"}} alt="SolLogo"></img>
-
-                            <BtnWrap style={{marginTop:"50px"}}>
+                            <TopLine >Opening</TopLine>
+                            26th April 2022 <br/> Price: 0 Sol <img src={solLogo} style={{width:"16px"}} alt="SolLogo"></img><br/><br/>
+                            ⚠️ Be sure to have at least 0.015 SOL in order to make up for CM fees ⚠️ 
+                            
+                            <BtnWrap style={{marginTop:"20px"}}>
                                 {
                                     countdownFinished
-                                    ?   <CollectiveButton2 to="/whitelistpresalemint"> GO TO MINT</CollectiveButton2>
+                                    ?   <CollectiveButton2 to="/mint"> GO TO MINT</CollectiveButton2>
                                     :   <Countdown
                                             date={mintDate}
                                             onMount={({ completed }) => completed }

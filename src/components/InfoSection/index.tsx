@@ -39,19 +39,9 @@ const InfoSection = (props: InfoProps) => {
                                 }
                             </Heading> 
                             {
-                                props.id==="project"
-                                ?
-                                    <Subtitle darkText={props.darkText}>
-                                        {props.subtitle[0]}
-                                            <br/><br/>
-                                        {props.subtitle[1]}
-                                            <br/><br/>
-                                        <TopLine>Public Sale</TopLine> 1st February 2022 <br/> Price: 0.420 <img src={solLogo} style={{width:"16px"}} alt="SolLogo"></img>
-                                    </Subtitle>
-                                :   
-                                    <Subtitle darkText={props.darkText}>
-                                        {props.subtitle}
-                                    </Subtitle>
+                                <Subtitle darkText={props.darkText}>
+                                    {props.subtitle}
+                                </Subtitle>
                             }
                             
                             <BtnWrap>
@@ -62,7 +52,7 @@ const InfoSection = (props: InfoProps) => {
                                     :
                                         props.id==="collection"  
                                         ?
-                                            <CollectiveButton2 to="/mint"> GO TO MINT</CollectiveButton2>
+                                            <CollectiveButton2 to="/mint"> FREE MINT</CollectiveButton2>
                                         :
                                             ""
                                 }

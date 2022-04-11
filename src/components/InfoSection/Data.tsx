@@ -1,6 +1,6 @@
 
 import img1 from "../../assets/images/Cloudies8.gif";
-import img2 from "../../assets/images/Cloudies7.gif";
+import img2 from "../../assets/images/glitchCloudy.gif";
 import img3 from "../../assets/images/NeonCloudsRadRugsCertificate.png";
 import box from "../../assets/images/info/box.png";
 import rewards from "../../assets/images/info/rewards.png";
@@ -34,9 +34,9 @@ export const mintData =
     lightText: true,
     lighTextDesc: true,
     topLine: "The Collection",
-    headline: "Ready to get yours?",
-    subtitle: "Plus 60% of collection sold!!!",
-    buttonLabel: "Go to mint",
+    headline: "Don't miss your free Cloudy!",
+    subtitle: "Free mint of 1250 Cloudy for gen0 Cloudy holders.",
+    buttonLabel: "Buy for free",
     to: "mint",
     imgStart: true,
     img: img2,
