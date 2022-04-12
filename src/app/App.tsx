@@ -46,11 +46,7 @@ const App = () => {
             <WalletProvider wallets={wallets} autoConnect>
               <WalletDialogProvider>
                 <Routes>
-                  {window.location.host.split('.')[0] === 'collective'?
-                    <Route path="/" element={<StakingPage connection={connection}/>}/>
-                    
-                    : ""
-                  }
+                  
                   <Route path="/mint" element={ <MintPage 
                       candyMachineId={candyMachineId}
                       connection={connection}
@@ -70,7 +66,14 @@ const App = () => {
 
 export default App;
 
-  /*<Route path="/">
+  /*
+  {window.location.host.split('.')[0] === 'collective'?
+                    <Route path="/" element={<StakingPage connection={connection}/>}/>
+                    
+                    : ""
+                  }
+  
+  <Route path="/">
                     <Page404/>
                   </Route>
   
