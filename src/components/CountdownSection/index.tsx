@@ -12,7 +12,7 @@ const CountdownSection = ()=>
 
     const [countdownFinished, setFinished] = useState(false);
 
-    const mintDate = new Date('2022-04-29T21:00:00Z');
+    const mintDate = new Date('2022-04-28T21:00:00Z');
     const now = new Date();
 
     if(!countdownFinished && mintDate < now )

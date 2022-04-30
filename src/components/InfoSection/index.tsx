@@ -1,6 +1,5 @@
 
 import GlitchText from '../Glitch';
-import solLogo from "../../assets/images/solanaLogo.png"
 import { InfoContainer, InfoWrapper, InfoRow, Column1,Column2,TextWrapper,TopLine,Heading,Subtitle,ImgWrap,Img, BtnWrap} from './InfoElements';
 import CardSection from '../Cards';
 import { Button } from '../Button';

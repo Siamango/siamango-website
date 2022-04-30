@@ -1,14 +1,10 @@
 import * as anchor from "@project-serum/anchor";
-import HeroSection from "../components/HeroSection/HeroSection";
+import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import InfoSection from "../components/InfoSection";
-import { DAOgameData, deflationaryMechanismData, fundInvestmentData, mintData, passiveIncomeData, teamData} from "../components/InfoSection/Data";
-//import CardSection from "../components/Cards/";
+import { DAOgameData, deflationaryMechanismData, fundInvestmentData, passiveIncomeData, teamData} from "../components/InfoSection/Data";
 import TimeLine from "../components/TimeLine";
-//import MintSection from "../components/Mint";
-//import CollectiveSection from "../components/CollectiveSections";
-//import FloatingCollective from "../components/FloatingButton";
 import FaqSection from "../components/Faq";
 import LoreSection from "../components/LoreSection";
 import ListedSection from "../components/ListedSection";
@@ -53,4 +49,4 @@ const Home = (props: HomeProps) => {
 };
 
 export default Home;
-//<InfoSection {...mintData}/>
+//<InfoSection {...mintData}/><CountdownSection/>

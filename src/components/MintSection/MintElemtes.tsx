@@ -78,6 +78,7 @@ const H1 = styled.h1`
     font-size: 3rem;
 `;
 
+//My Mint button
 const MintButtonContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -175,15 +176,15 @@ const MintButtonSpan = styled.span`
 
 export interface MintButtonProps
 {
-    onclick?:any;
+    onClick?:any;
     children?:any;
 }
 
-export const MintButton = (props:MintButtonProps)=>
+export const MyMintButton = (props:MintButtonProps)=>
 {
     return (
         <MintButtonContainer>
-            <MintButtonA onClick={props.onclick}><MintButtonSpan>{props.children}</MintButtonSpan></MintButtonA>
+            <MintButtonA onClick={props.onClick}><MintButtonSpan>{props.children}</MintButtonSpan></MintButtonA>
         </MintButtonContainer>
     );
 }

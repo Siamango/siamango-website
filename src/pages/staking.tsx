@@ -1,5 +1,5 @@
 
-import { WalletButton, LinkToHome, } from "../components/Collective/CollectiveElements";
+import { WalletButton } from "../components/CollectiveSections/CollectiveSectionElements";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Alert from "@material-ui/lab/Alert";
@@ -17,7 +17,7 @@ import NFTCard from "../components/Staking/NFTCard";
 import { StakingBody } from "../components/Staking/StakingPageElements";
 import { NFTCardContainer } from "../components/Staking/NFTCard/NFTCardElements";
 import GlitchText from "../components/Glitch";
-import { Snackbar } from "@material-ui/core";
+import { Link, Snackbar } from "@material-ui/core";
 
 export interface RewardProps
 {
@@ -221,7 +221,7 @@ const StakingPage = (props: RewardProps) => {
 
     return (
         <StakingBody>
-            <LinkToHome href="https://neonclouds.net"><img src={logo} alt="" style={{position:"fixed", top:"-20px", left:"0", width:"300px"}}/></LinkToHome>
+            <Link href="https://neonclouds.net"><img src={logo} alt="" style={{position:"fixed", top:"-20px", left:"0", width:"300px"}}/></Link>
             
             <WalletButton wallet={wallet} balance={balance}/>
 

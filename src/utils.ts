@@ -11,6 +11,7 @@ export interface AlertState {
   open: boolean;
   message: string;
   severity: 'success' | 'info' | 'warning' | 'error' | undefined;
+  noHide?: boolean;
 }
 
 export const toDate = (value?: anchor.BN) => {
@@ -51,14 +52,15 @@ export const CIVIC = new anchor.web3.PublicKey(
   'gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs',
 );
 
-export const getAtaForMint = async (
-  mint: anchor.web3.PublicKey,
-  buyer: anchor.web3.PublicKey,
-): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
-    [buyer.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
-  );
+export const getAtaForMint = async (mint: anchor.web3.PublicKey, buyer: anchor.web3.PublicKey): Promise<[anchor.web3.PublicKey, number]> => 
+{
+  return await anchor.web3.PublicKey.findProgramAddress([buyer.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()], SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID);
+};
+
+export const getAtaForMintV2 = async (connection: anchor.web3.Connection, mint: anchor.web3.PublicKey, buyer: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => 
+{
+  console.log("getAtaForMintV2 in use");
+  return (await connection.getTokenAccountsByOwner(buyer, {mint:mint})).value[0].pubkey;
 };
 
 export const getNetworkExpire = async (

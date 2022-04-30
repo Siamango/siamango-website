@@ -1,16 +1,7 @@
-import * as anchor from "@project-serum/anchor";
 import styled from "styled-components/macro";
-import MintSection from "../components/Mint";
+import {MintSection, MintProps} from "../components/MintSection";
 import img from "../assets/images/logo-compressed.png";
 import video from "../assets/videos/glitch.mp4";
-
-export interface MintPageProps
-{
-    candyMachineId?: anchor.web3.PublicKey;
-    connection: anchor.web3.Connection;
-    txTimeout: number;
-    rpcHost: string;
-}
 
 const MintPageContainer = styled.div`
     height: 100vh;
@@ -23,7 +14,6 @@ const MintPageContainer = styled.div`
     img
     {
         height: 50%;
-        //object-fit: none;
     }
 
     #title
@@ -49,9 +39,8 @@ const MintPageContainer = styled.div`
 
 `;
 
-const MintPage = (props:MintPageProps)=>
+const MintPage = (props:MintProps)=>
 {
-    
     return(
         <div >
             <video className="video-background" loop autoPlay muted playsInline> 

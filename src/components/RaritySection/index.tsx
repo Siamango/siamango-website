@@ -1,7 +1,7 @@
 import { CircularProgress } from "@material-ui/core";
 import { useState } from "react";
 import {  Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper, TopLine } from "../InfoSection/InfoElements";
-import { RarityForm, RarityFormDiv, SearchButton } from "../Rarity/RarityElements";
+import { RarityForm, RarityFormDiv, SearchButton } from "./RarityElements";
 import img from "../../assets/images/Cloudies8.gif";
 import GlitchText from "../Glitch";
 

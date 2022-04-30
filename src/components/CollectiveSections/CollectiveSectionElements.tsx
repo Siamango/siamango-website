@@ -1,4 +1,7 @@
 import  styled  from "styled-components";
+import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
+import { shortenAddress } from "../../candy-machine"; 
+import { WalletDialogButton, WalletDisconnectButton } from "@solana/wallet-adapter-material-ui";
 
 const BtnContainer = styled.div`
     position: relative;
@@ -182,7 +185,6 @@ const BtnA2 = styled.a`
 
 `;
 
-
 export const CollectiveButton2 = (props:CollectiveButtonProps)=>
 {
     return(
@@ -194,6 +196,83 @@ export const CollectiveButton2 = (props:CollectiveButtonProps)=>
             {props.children}
         </BtnA2>
     );
-
 };
 
+export const Box = styled.div`
+    position: relative;
+    width:50%;
+    height: 80%;
+    max-width: 500px;
+    max-height: 700px;
+    background: linear-gradient(315deg, #009fff, #0e1538, #cd3594);;
+
+    &:before
+    {
+        content:"";
+        position: absolute;
+        top:-4px;
+        left:-4px;
+        right:-4px;
+        bottom:-4px;
+        transform:skewX(2deg) skewY(4deg);
+        background:linear-gradient(315deg, #009fff, #0e1538, #cd3594);
+    }
+
+    &:after
+    {
+        content:"";
+        position: absolute;
+        top:-4px;
+        left:-4px;
+        right:-4px;
+        bottom:-4px;
+        background:linear-gradient(315deg, #009fff, #0e1538, #cd3594);
+        filter: blur(50px);
+    }
+
+    & span
+    {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background: #131313;
+        z-index:1;
+    }
+`;
+
+const WalletButtonContainer = styled.div`
+    position: fixed;
+    top:50px;
+    right: 50px;
+`;
+
+export interface WalletButtonProps{
+    wallet:any;
+    balance:any;
+    OnDisconnect?:any;
+}
+export const WalletButton = (props:WalletButtonProps)=>
+{
+    return(
+        <div style={{textAlign: "center", float:"left"}}>
+            <WalletButtonContainer>
+                {!props.wallet.connected
+                    ?<WalletDialogButton className='btn--outline' style={{border: "2px solid #cd3594", backgroundColor: "rgba(0,0,0,0.5)", marginRight:"10px"}}>Connect Wallet</WalletDialogButton>
+                    : <div className="dropdown">
+                    <button className="walletLink">
+                        <AccountBalanceWalletOutlinedIcon style={{marginRight:"10px", marginBottom: "-5px"}} />
+                        {(shortenAddress(props.wallet.publicKey?.toBase58() || ""))}
+                    </button>
+                    
+                    <div className="dropdown-menu">
+                        <div style={{width:"100%", textAlign:"center"}}>Balance: {props.balance} SOL</div>
+                        <div style={{width:"100%",height:"1px", backgroundColor:"white", marginBottom:"5px", marginTop:"5px" }}/>
+                        <WalletDisconnectButton onClick={props.OnDisconnect} style={{backgroundColor:"#fd5252", boxShadow:"none"}}/>
+                    </div>
+                </div>}
+            </WalletButtonContainer>
+        </div>
+    );
+}
