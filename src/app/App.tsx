@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import MintPage from "../pages/Mint";
 import Page404 from "../pages/404";
-
+import GamePage from "../pages/Game";
 
 const candyMachineId = new anchor.web3.PublicKey(
   process.env.REACT_APP_CANDY_MACHINE_ID!
@@ -35,6 +35,11 @@ const App = () => {
             <WalletProvider wallets={wallets} autoConnect>
               <WalletDialogProvider>
                 <Routes>
+                  {
+                    window.location.host.split('.')[0] === 'game'
+                    ? <Route path="/" element={<GamePage />}/>
+                    : ""
+                  }
                   <Route path="/" element={ <Home connection={connection}/>}/>
                   <Route path="/mint"
                     element={<MintPage 

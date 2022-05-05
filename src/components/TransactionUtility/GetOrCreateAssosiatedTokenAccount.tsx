@@ -15,22 +15,28 @@ export async function getOrCreateAssociatedTokenAccount(
     commitment?: Commitment,
     programId = TOKEN_PROGRAM_ID,
     associatedTokenProgramId = ASSOCIATED_TOKEN_PROGRAM_ID
-) {
-    const associatedToken = await getAssociatedTokenAddress(mint, owner, allowOwnerOffCurve, programId, associatedTokenProgramId)
+) 
+{
+    const associatedToken = await getAssociatedTokenAddress(mint, owner, allowOwnerOffCurve, programId, associatedTokenProgramId);
 
     // This is the optimal logic, considering TX fee, client-side computation, RPC roundtrips and guaranteed idempotent.
     // Sadly we can't do this atomically.
-    let account
-    try {
+    let account;
+    try 
+    {
         account = await getAccountInfo(connection, associatedToken, commitment, programId)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } 
+    catch (error: any) 
+    {
         // TokenAccountNotFoundError can be possible if the associated address has already received some lamports,
         // becoming a system account. Assuming program derived addressing is safe, this is the only case for the
         // TokenInvalidAccountOwnerError in this code path.
-        if (error.message === 'TokenAccountNotFoundError' || error.message === 'TokenInvalidAccountOwnerError') {
+        if (error.message === 'TokenAccountNotFoundError' || error.message === 'TokenInvalidAccountOwnerError') 
+        {
             // As this isn't atomic, it's possible others can create associated accounts meanwhile.
-            try {
+            try 
+            {
                 const transaction = new Transaction().add(
                     createAssociatedTokenAccountInstruction(
                         payer,
@@ -42,22 +48,27 @@ export async function getOrCreateAssociatedTokenAccount(
                     )
                 )
 
-                const blockHash = await connection.getRecentBlockhash()
-                transaction.feePayer = await payer
-                transaction.recentBlockhash = await blockHash.blockhash
-                const signed = await signTransaction(transaction)
+                const blockHash = await connection.getRecentBlockhash();
+                transaction.feePayer = payer;
+                transaction.recentBlockhash = blockHash.blockhash;
+                const signed = await signTransaction(transaction);
 
                 const signature = await connection.sendRawTransaction(signed.serialize())
 
                 await connection.confirmTransaction(signature)
-            } catch (error: unknown) {
+            } 
+            catch (error: unknown) 
+            {
                 // Ignore all errors; for now there is no API-compatible way to selectively ignore the expected
                 // instruction error if the associated account exists already.
+                console.log(error);
             }
 
             // Now this should always succeed
             account = await getAccountInfo(connection, associatedToken, commitment, programId)
-        } else {
+        } 
+        else 
+        {
             throw error
         }
     }

@@ -1,5 +1,5 @@
 import video from "../../../assets/videos/Trailer.mp4"
-import img from "../../../assets/images/yasuke_idle.gif"
+import img from "../../../assets/images/game/yasuke_idle.gif"
 import { Column1, Column2, Heading, Img, ImgWrap, InfoContainer, InfoRow, InfoWrapper, Subtitle, TextWrapper } from "../../InfoSection/InfoElements";
 
 const NextGenSection = ()=> 

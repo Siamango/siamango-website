@@ -9,7 +9,7 @@ const unstakeTransaction = async (connection:anchor.web3.Connection, mint : stri
     if (!wallet.publicKey) throw new WalletNotConnectedError();
     if (!wallet.signTransaction) throw new WalletNotConnectedError();
     //console.log(mint);
-    var fromWallet = web3.Keypair.fromSecretKey(bs58.decode(process.env.REACT_APP_PRIVATE_KEY!));
+    var fromWallet = web3.Keypair.fromSecretKey(bs58.decode(process.env.REACT_APP_STAKING_WALLET_PRIVATE_KEY!));
 
     var myToken = new Token(
        connection,

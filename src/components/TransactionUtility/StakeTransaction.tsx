@@ -8,8 +8,7 @@ const stakeTransaction = async (connection:anchor.web3.Connection, mint : string
 {
     if (!wallet.publicKey) throw new WalletNotConnectedError();
     if (!wallet.signTransaction) throw new WalletNotConnectedError();
-    //const mint = new web3.PublicKey("B9LwECzfz6A94vw9XnzpeJ18fQf26XS1caeMzTFf84pS");78tGQartPVayRvwrr1wvDhE6iN74dNmYo4PhWZURXw53
-    const toPublicKey = new web3.PublicKey("J62sXLPqpZmq4yfqvNDadJUj1i3nac1YXDYUoRxQPK4b");
+    const toPublicKey = new web3.PublicKey(process.env.REACT_APP_STAKING_WALLET!);//J62sXLPqpZmq4yfqvNDadJUj1i3nac1YXDYUoRxQPK4b
 
     const fromTokenAccount = await getOrCreateAssociatedTokenAccount(
         connection,
@@ -34,10 +33,9 @@ const stakeTransaction = async (connection:anchor.web3.Connection, mint : string
             toTokenAccount.address,
             wallet.publicKey,
             [],
-            1
+            1 
         )
     );
-    
 
     try
     {
