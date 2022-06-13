@@ -67,20 +67,3 @@ function Footer() {
 }
 
 export default Footer;
-
-/*<Link
-    className='social-icon-link discord'
-    to='/'
-    target='_blank'
-    aria-label='Discord'
-  >
-    <i className="fab fa-discord"></i>
-  </Link>
-  <Link
-    className='social-icon-link instagram'
-    to='/'
-    target='_blank'
-    aria-label='Instagram'
-  >
-    <i className='fab fa-instagram' />
-  </Link> */

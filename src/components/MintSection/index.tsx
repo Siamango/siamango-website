@@ -378,7 +378,7 @@ export const MintSection = (props: MintProps) =>
               !wallet.connected
               ? <ConnectToStart>Connect your wallet to mint</ConnectToStart>
               :  isActive
-                ? isWhitelistUser
+                ? true//isWhitelistUser
                   ? isUserMinting 
                     ? <CircularProgress />
                     : <>

@@ -14,7 +14,7 @@ const RaritySection = () => {
     {
         e.preventDefault();
         setLoading(true);
-        fetch(`https://neonclouds.net:5555/api/collection/info?id=`+e.target.id.value,{
+        fetch(`https://neonclouds.net:4242/api/collection/info?id=`+e.target.id.value,{
             method: "GET",
             headers: {
                 "access-control-allow-origin" : "*",

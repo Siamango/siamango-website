@@ -10,7 +10,7 @@ import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 
 import logo from "../assets/images/logo-compressed.png";
 
-import mintList from "../assets/hashlist.json";
+import mintList from "../assets/gen0Mint/hashlist.json";
 import stakeTransaction from "../components/TransactionUtility/StakeTransaction";
 import unstakeTransaction from "../components/TransactionUtility/UnstakeTransaction";
 import NFTCard from "../components/Staking/NFTCard";
@@ -71,7 +71,7 @@ const StakingPage = (props: RewardProps) => {
         var loadData:any[];
         loadData= JSON.parse(JSON.stringify(mintList));
 
-        //check if is our collection
+        //check if is our collection (uncomment in production)
         //nftsmetadata = nftsmetadata.filter(metadata => {return loadData.includes(metadata.mint) })
 
         const nftsBinded = nftsmetadata.map( async info => {
@@ -95,7 +95,7 @@ const StakingPage = (props: RewardProps) => {
             var info = await metadata.Metadata.findByMint(props.connection, new web3.PublicKey(JSON.parse(JSON.stringify(nft)).mint));
             //console.log(data);
             var meta = "";
-            await fetch( info.data.data.uri).then(response => response.json()).then(data => {  meta=data});
+            await fetch(info.data.data.uri).then(response => response.json()).then(data => {meta=data});
             return{info, meta};
         });
         //console.log(await Promise.all(staked));
@@ -228,17 +228,18 @@ const StakingPage = (props: RewardProps) => {
             <NFTCardContainer>
                 <h1 style={{color:"#009fff"}}>NFT INSIDE WALLET</h1>
                 {
-                    JSON.stringify(walletNfts[0]) !== "{}" && walletNfts.length>0?
-                    (
-                        walletNfts.map(nft => {
-                            //console.log(nft);
-                            return(<NFTCard nft={nft} onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)} label="Stake"/>);
-                        })
-                    )
+                    JSON.stringify(walletNfts[0]) !== "{}" && walletNfts.length>0
+                    ?
+                        (
+                            walletNfts.map(nft => {
+                                //console.log(nft);
+                                return(<NFTCard nft={nft} onClick={()=>stake( JSON.parse(JSON.stringify(nft)).info.mint)} label="Stake"/>);
+                            })
+                        )
                     :
-                    (
-                        <GlitchText fontSize="40px">Empty wallet</GlitchText>
-                    )
+                        (
+                            <GlitchText fontSize="40px">Empty wallet</GlitchText>
+                        )
                 }
 
                 <h1 style={{color:"#009fff"}}>NFT STAKED</h1>

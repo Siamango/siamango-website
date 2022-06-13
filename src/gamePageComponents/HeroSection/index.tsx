@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react';
-import text from "../../assets/images/game/idle.gif";
-import { HeroContainer } from './HeroElements';
+import { HeroBg, HeroContainer, HeroContent, Player, VideoBg,  } from './HeroElements';
+import video from "../../assets/videos/game.mp4";
+import player from "../../assets/images/game/idle.gif"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-function HeroSection() {
-
-  const [offsetY, setOffsetY] = useState(0);
-  const handleScroll = () => 
-  {
-    let logo = document.getElementById('player')!;
-    //let button = document.getElementById('linkButton')!;
-    setOffsetY(window.pageYOffset);
-    const position = 2 - window.scrollY/500;
-    //console.log(position);
-    logo.style.opacity = position+"";
-    //button.style.opacity = position+"";
-  }
-
-
-  useEffect(() => {
-      
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => {
-          window.removeEventListener('scroll', handleScroll);
-      }
-  }, []);
-
+function HeroSection() 
+{
   return (
-    <HeroContainer>
-      
-      <h1 id="player" style={{transform: `translateY(${offsetY*0.6}px)`, }}>
-        <img  alt ="" src={text} style={{width:"100%", height:"100%", zIndex:"-10"}}></img>
-        <img  alt ="" src={text} style={{width:"100%", height:"100%", zIndex:"-10"}}></img>
-      </h1>
-      
-      
+    <HeroContainer id="home">
+      <HeroBg>
+          <VideoBg autoPlay loop muted src={video} />
+      </HeroBg>
+      <HeroContent>
+        <Player>
+          <img src={player} />
+          <img src={player} style={{transform:"scaleX(-1)"}}/>
+        </Player>
+        <FontAwesomeIcon icon={faChevronDown}/>
+        <FontAwesomeIcon icon={faChevronDown}/>
+      </HeroContent>
     </HeroContainer>
   );
 }

@@ -9,8 +9,8 @@ import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "../pages/Home";
-import MintPage from "../pages/Mint";
 import Page404 from "../pages/404";
+import StakingPage from "../pages/staking";
 import GamePage from "../pages/Game";
 
 const candyMachineId = new anchor.web3.PublicKey(
@@ -40,13 +40,13 @@ const App = () => {
                     ? <Route path="/" element={<GamePage />}/>
                     : ""
                   }
+                  {
+                    window.location.host.split('.')[0] === 'staking'?
+                    <Route path="/" element={<StakingPage connection={connection}/>}/>
+                    
+                    : ""
+                  }
                   <Route path="/" element={ <Home connection={connection}/>}/>
-                  <Route path="/mint"
-                    element={<MintPage 
-                      candyMachineId={candyMachineId}
-                      connection={connection}
-                      txTimeout={txTimeout}
-                      rpcHost={rpcHost}/>} />
                   <Route
                     path="*"
                     element={<Page404/>}

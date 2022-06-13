@@ -128,9 +128,10 @@ const Navbar = (props: NavbarProps) => {
                 </li>
                 <li className='nav-item'>
                   <a
-                    href="../assets/Whitepaper.pdf"
-                    download
+                    href="https://neon-clouds-collective.gitbook.io/neon-clouds-collective-whitepaper/"
                     className='nav-links'
+                    target='_blank'
+                    rel="noreferrer"
                     onClick={closeMobileMenuItem}
                   >
                     Whitepapaer

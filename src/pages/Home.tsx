@@ -8,15 +8,12 @@ import TimeLine from "../components/TimeLine";
 import FaqSection from "../components/Faq";
 import LoreSection from "../components/LoreSection";
 import ListedSection from "../components/ListedSection";
-import RaritySection from "../components/RaritySection";
 import NextGenSection from "../components/NewInfoSection/NextGenGame";
 import MenuSection from "../components/MenuSection";
 import PassiveIncomeSection from "../components/NewInfoSection/PassiveIncome";
 import DaoGameSection from "../components/NewInfoSection/DAOGame";
 import FundInvestmentsSection from "../components/NewInfoSection/FundInvestments";
 import DeflationarySection from "../components/NewInfoSection/DeflacitionariMechanism";
-import CountdownSection from "../components/CountdownSection";
-
 
 export interface HomeProps {
   connection: anchor.web3.Connection;
@@ -29,24 +26,20 @@ const Home = (props: HomeProps) => {
       <Navbar connection={props.connection}/>
       <HeroSection />
       <MenuSection/>
-      <CountdownSection/>
       <PassiveIncomeSection {...passiveIncomeData}/>
       <DaoGameSection {...DAOgameData}/>
       <NextGenSection/>
       <FundInvestmentsSection {...fundInvestmentData}/>
       <DeflationarySection {...deflationaryMechanismData}/>
       <LoreSection/>
-      
       <ListedSection/>
       <TimeLine />
       <InfoSection {...teamData}/>
-      <RaritySection />
       <FaqSection/>
-      
       <Footer/>
     </div>
   );
 };
 
 export default Home;
-//<InfoSection {...mintData}/><CountdownSection/>
+//<InfoSection {...mintData}/><CountdownSection/><RaritySection />

@@ -10,12 +10,11 @@ function Footer() {
     }
   return (
     <div className='footer-container'>
-    
       <section className='social-media'>
         <div className='social-media-wrap'>
           <div className='footer-logo'>
-            <LinkScroll to='home' onClick={goTop} className='social-logo'>
-            Neon Clouds
+            <LinkScroll to='home' onClick={goTop} className='game-logo'>
+            Roug Duel.
             </LinkScroll>
           </div>
           <div className='social-icons'>
@@ -67,20 +66,3 @@ function Footer() {
 }
 
 export default Footer;
-
-/*<Link
-    className='social-icon-link discord'
-    to='/'
-    target='_blank'
-    aria-label='Discord'
-  >
-    <i className="fab fa-discord"></i>
-  </Link>
-  <Link
-    className='social-icon-link instagram'
-    to='/'
-    target='_blank'
-    aria-label='Instagram'
-  >
-    <i className='fab fa-instagram' />
-  </Link> */
