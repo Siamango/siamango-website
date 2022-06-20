@@ -11,7 +11,6 @@ setTimeout(()=>{
       <App/>
     </React.StrictMode>,
   document.getElementById('root'));
-
 },1000);
 
 

@@ -25,11 +25,12 @@ export const Header = styled.div`
     
     & #logo
     {
+        font-family: 'Press Start 2P', cursive;
         position: absolute;
         top:50%;
         left:50%;
         transform: translate(-50%,-50%);
-        font-size: 15vw;
+        font-size: 7vw;
         color: #fff;
         font-weight: 700;
         transition: 1s;

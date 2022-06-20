@@ -1,6 +1,6 @@
-import { Button } from '../../components/Button';
 import GlitchText from '../../components/Glitch';
 import { InfoRow, Column1,Column2,TextWrapper,TopLine,Heading,Subtitle,ImgWrap,Img, BtnWrap} from './InfoElements';
+import './prova.css';
 
 export interface InfoProps{
     lightBg:any;
@@ -41,7 +41,7 @@ const InfoSection = (props: InfoProps) => {
                 
                 <Column2>  
                     <ImgWrap id={props.id+"IMG"}>
-                        <Img src={props.img} alt="ART IMAGE" style={{filter: "drop-shadow(-5px 5px 10px #a8141d)"}}/>
+                        <div id="imgInfo"></div>
                     </ImgWrap>
                 </Column2>
                     
@@ -51,3 +51,5 @@ const InfoSection = (props: InfoProps) => {
 }
 
 export default InfoSection;
+
+//<Img src={props.img} alt="ART IMAGE" style={{filter: "drop-shadow(-5px 5px 10px #a8141d)"}}/>

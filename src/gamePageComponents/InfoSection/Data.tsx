@@ -8,7 +8,7 @@ export const gameInfo =
     lighTextDesc: false,
     topLine: "The Game",
     headline: "Game is on",
-    subtitle: "The Neon Clouds Collective is a deflationary, generative collection of 1569 NFTs on the Solana blockchain.",
+    subtitle: "Rogue Duel is a innovative 1 vs 1, play to earn, competitive and skill based game. ",
     buttonLabel: "Take a look",
     to: "gallery",
     imgStart: false,

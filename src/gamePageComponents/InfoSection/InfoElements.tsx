@@ -99,6 +99,7 @@ export const ImgWrap = styled.div`
     align-items: center;
     justify-content: center;
     display: flex;
+
 `;
 
 export const Img = styled.img`
@@ -111,5 +112,7 @@ export const Img = styled.img`
     {
         width: 100%;
     }
+
+
     
 `;

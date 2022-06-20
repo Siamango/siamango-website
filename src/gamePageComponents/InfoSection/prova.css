@@ -1,0 +1,27 @@
+#imgInfo
+{
+    
+    height: 70%;
+    width: 70%;
+    animation: animatePlayer 5s linear infinite;    
+}
+
+@keyframes animatePlayer
+{
+    0%{
+        background: url('../../assets/images/game/yasuke_idle.gif') center center/cover no-repeat; 
+    }
+    
+    33%{
+        background: url('../../assets/images/game/bomber.gif') center center/cover no-repeat; 
+    }
+
+    66%{
+        background: url('../../assets/images/game/idle.gif') center center/cover no-repeat; 
+    }
+    
+    99%{
+        background: url('../../assets/images/game/yasuke_idle.gif') center center/cover no-repeat; 
+    }
+
+}

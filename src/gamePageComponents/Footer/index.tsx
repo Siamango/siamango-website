@@ -14,7 +14,7 @@ function Footer() {
         <div className='social-media-wrap'>
           <div className='footer-logo'>
             <LinkScroll to='home' onClick={goTop} className='game-logo'>
-            Roug Duel.
+            Rogue Duel.
             </LinkScroll>
           </div>
           <div className='social-icons'>

@@ -1,9 +1,14 @@
 import { Header, Nav, VideoBg } from "./NavbarElements";
 import video from "../../assets/videos/game.mp4";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link , animateScroll as scroll} from "react-scroll";
 
 const HeaderNavbar = () =>
 {
+
+    const [click, setClick] = useState(false);
+    const [button, setButton] = useState(true);
+
     const handleScroll = () => {
         console.log(window.scrollY);
         const header = document.getElementById('header')!;
@@ -25,7 +30,7 @@ const HeaderNavbar = () =>
         else
         {
             header.style.height="100vh";
-            logo.style.fontSize="15vw";
+            logo.style.fontSize="7vw";
             logo.style.transform="translate(-50%,-50%)";
             logo.style.left="50%";
             logo.style.color="#fff";
@@ -34,6 +39,23 @@ const HeaderNavbar = () =>
             video.style.opacity="0.5";
         }
     };
+    
+    const closeMobileMenuItem = () => 
+    {
+      setClick(false);
+    };
+
+    const showButton = () => {
+        if (window.innerWidth <= 1330) {
+          setButton(false);
+        } else {
+          setButton(true);
+        }
+      };
+    
+    useEffect(() => {
+        showButton();
+    }, []);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -43,17 +65,22 @@ const HeaderNavbar = () =>
         }
     }, []);
 
+    window.addEventListener('resize', showButton);
+
     return (
         <>
             <Header id="header">
                 <VideoBg id="video" autoPlay loop muted src={video}/>
-                <a href="#" id="logo">Roug Duel.</a>
+                <a href="#" id="logo">Rogue Duel.</a>
                 <Nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Palyer</a></li>
-                        <li><a href="#">Stats</a></li>
+                        <li><a href="#">Faqs</a></li>
+                        <Link to='menuContainer' className='nav-links' onClick={closeMobileMenuItem}
+                            smooth={true} duration={500} spy={true} offset={-200}>
+                            Download
+                        </Link>
                     </ul>
                 </Nav>
             </Header>
